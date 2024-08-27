@@ -20,7 +20,7 @@ class DrawableObject {
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
             ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0)'; 
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
