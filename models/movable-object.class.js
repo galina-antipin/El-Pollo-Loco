@@ -23,9 +23,6 @@ class MovableObject extends DrawableObject {
         return this.y < 180;
     }}
 
-
-
-
     isColliding(mo) {
         return (this.x < (mo.x + mo.width) &&
             (this.x + this.width) > mo.x &&
@@ -33,11 +30,12 @@ class MovableObject extends DrawableObject {
             (this.y + this.height) > mo.y);
     }
 
-    hit() {
+    hit() {  
+        this.hurt_sound.play();
         this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
-
+            this.dead_sound.play();
         } else {
             this.lastHit = new Date().getTime();
 

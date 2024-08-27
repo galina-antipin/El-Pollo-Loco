@@ -7,6 +7,7 @@ class World {
     camera_x = 0;
     statusBar = new Statusbar();
     throwableObject = [];
+    game_sound = new Audio('audio/taratata.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');

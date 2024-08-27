@@ -24,15 +24,21 @@
 </head>
 
 <body onload="init()">
-    <h1>El pollo loco</h1>
+    <h1>El Pollo Loco</h1>
+    <div id="start-screen">
+        <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="Start Screen">
+        <button id="start-btn" onclick="startGame()">Start Game</button>
+        <footer>
+            <a href="instructions.html"><div class="instructions">
+               <span>Instructions</span>
+            </div></a>
+            <div class="space-between"></div>
+            <a href="impressum.html"><div class="impressum" onclick="showImpressum()"><span>Impressum</span></div></a>
+        </footer>
+    </div>
+    <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>
+    <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
 
-    <canvas id="canvas" width="720" height="480">
-
-    </canvas>
 </body>
-
-</html>
-
-
 
 </html>
