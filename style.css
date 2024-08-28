@@ -17,7 +17,7 @@ body {
 }
 
 #start-screen img {
-    width: 780px;
+    width: 750px;
     height: 480px;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -141,6 +141,10 @@ h4 {
     canvas {
         width: 100%;
     }
+
+    .start-screen {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-height: 600px) {
@@ -150,5 +154,9 @@ h4 {
 
     h1 {
         display: none;
+    }
+
+    .start-screen {
+        height: 100vh;
     }
 }
