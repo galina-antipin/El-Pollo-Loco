@@ -101,8 +101,10 @@ class World {
     }
 
     collectBottle() {
-        this.collectedBottles += 1; 
-        this.bottlesStatusBar.setPercentage((this.collectedBottles / 10) * 100); 
+        if (this.collectedBottles < 10) {
+            this.collectedBottles += 1; 
+            this.bottlesStatusBar.setPercentage((this.collectedBottles / 10) * 100); 
+        }
     }
     
     checkBottleCollisions() {
@@ -112,6 +114,15 @@ class World {
                 this.bottles.splice(index, 1); 
             }
         });
+    }
+
+    checkThrowObjects() {
+        if (this.keyboard.D && this.collectedBottles > 0) { 
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObject.push(bottle);
+            this.collectedBottles--;
+            this.bottlesStatusBar.setPercentage((this.collectedBottles / 10) * 100);
+        }
     }
 
     draw() {
