@@ -15,6 +15,7 @@ class World {
     bottles = [];
     collectedBottles = 0;
     bottlesStatusBar = new BottlesStatusBar();
+    endbossStatusBar = new EndbossStatusBar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -135,6 +136,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.coinsStatusBar);
         this.addToMap(this.bottlesStatusBar);
+        this.addToMap(this.endbossStatusBar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);
