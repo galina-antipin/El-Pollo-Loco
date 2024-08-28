@@ -9,9 +9,11 @@
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>
+    <script src="models/coins.class.js"></script>
     <script src="models/chicken.class.js"></script>
-    <script src="models/cloud.class.js"></script>
     <script src="models/status-bar.class.js"></script>
+    <script src="models/coins-statusbar.class.js"></script>
+    <script src="models/cloud.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/background-object.class.js"></script>
     <script src="models/keyboard.class.js"></script>
@@ -29,11 +31,15 @@
         <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="Start Screen">
         <button id="start-btn" onclick="startGame()">Start Game</button>
         <footer>
-            <a href="instructions.html"><div class="instructions">
-               <span>Instructions</span>
-            </div></a>
+            <a href="instructions.html">
+                <div class="instructions">
+                    <span>Instructions</span>
+                </div>
+            </a>
             <div class="space-between"></div>
-            <a href="impressum.html"><div class="impressum" onclick="showImpressum()"><span>Impressum</span></div></a>
+            <a href="impressum.html">
+                <div class="impressum" onclick="showImpressum()"><span>Impressum</span></div>
+            </a>
         </footer>
     </div>
     <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>
