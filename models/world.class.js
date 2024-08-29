@@ -34,11 +34,11 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
-            this.checkThrowObjects();
-            this.checkCoinCollisions();
-            this.checkBottleCollisions();
-        }, 200);
+                this.checkCollisions();
+                this.checkThrowObjects();
+                this.checkCoinCollisions();
+                this.checkBottleCollisions();
+        }, 100);
     }
 
     checkThrowObjects() {
@@ -53,22 +53,24 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.y + this.character.height < enemy.y + enemy.height + 20) {
-                    if (enemy instanceof Chicken) { 
-                        if (!enemy.isDead) {  
-                            enemy.changeToDeadImage();
-                        }
-                    }
+                console.log('Kollision erkannt');
+                console.log('Character Y:', this.character.y);
+                console.log('Character Höhe:', this.character.height);
+                console.log('Enemy Y:', enemy.y);
+                console.log('Enemy Höhe:', enemy.height);
+    
+                if (this.character.y + this.character.height < enemy.y + enemy.height) {
+                    console.log('Tampering with dead image!');
+                    enemy.changeToDeadImage();
                 } else {
-                    if (!enemy.isDead) {  
-                        this.character.hit();
-                        this.statusBar.setPercentage(this.character.energy);
-                    }
+                    console.log('Charakter hat getroffen!');
+                    this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
                 }
             }
         });
     }
-
+    
     populateCoins() {
         let numberOfCoins = 70;
         let levelEndX = 5000;
@@ -186,4 +188,5 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+
 }
