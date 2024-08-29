@@ -25,5 +25,5 @@ y = -20;
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
-    }
-}
+     }
+} 

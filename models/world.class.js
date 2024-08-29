@@ -22,7 +22,7 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.populateCoins();
-        this.populateBottles(); 
+        this.populateBottles();
         this.draw();
         this.setWorld();
         this.run();
@@ -36,16 +36,16 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-            this.checkCoinCollisions(); 
+            this.checkCoinCollisions();
             this.checkBottleCollisions();
         }, 200);
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.collectedBottles > 0) { 
+        if (this.keyboard.D && this.collectedBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObject.push(bottle);
-            this.collectedBottles--; 
+            this.collectedBottles--;
             this.bottlesStatusBar.setPercentage((this.collectedBottles / 10) * 100);
         }
     }
@@ -53,29 +53,38 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                if (this.character.y + this.character.height < enemy.y + enemy.height + 20) {
+                    if (enemy instanceof Chicken) { 
+                        if (!enemy.isDead) {  
+                            enemy.changeToDeadImage();
+                        }
+                    }
+                } else {
+                    if (!enemy.isDead) {  
+                        this.character.hit();
+                        this.statusBar.setPercentage(this.character.energy);
+                    }
+                }
             }
         });
-
     }
 
     populateCoins() {
-        let numberOfCoins = 70; 
+        let numberOfCoins = 70;
         let levelEndX = 5000;
         const spacing = levelEndX / numberOfCoins;
-    
+
         for (let i = 0; i < numberOfCoins; i++) {
             let coin = new Coins();
-            coin.x = i * spacing + Math.random() * spacing; 
-            coin.y = Math.random() * (this.canvas.height - coin.height - 20) + 20; 
-            this.coins.push(coin); 
+            coin.x = i * spacing + Math.random() * spacing;
+            coin.y = Math.random() * (this.canvas.height - coin.height - 20) + 20;
+            this.coins.push(coin);
         }
     }
-  
+
     collectCoin() {
-        if (this.collectedCoins < 50) { 
-            this.collectedCoins += 1; 
+        if (this.collectedCoins < 50) {
+            this.collectedCoins += 1;
             this.coinsStatusBar.setPercentage((this.collectedCoins / 50) * 100);
             this.collect_sound.play();
         }
@@ -85,36 +94,36 @@ class World {
         this.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.collectCoin();
-                this.coins.splice(index, 1); 
+                this.coins.splice(index, 1);
             }
         });
     }
 
     populateBottles() {
         let numberOfBottles = 10;
-        const levelEndX = 5000; 
-        const levelHeight = this.canvas.height - 100; 
-    
+        const levelEndX = 5000;
+        const levelHeight = this.canvas.height - 100;
+
         for (let i = 0; i < numberOfBottles; i++) {
             let bottle = new Bottles();
             bottle.x = Math.random() * levelEndX;
-            bottle.y = Math.random() * levelHeight; 
+            bottle.y = Math.random() * levelHeight;
             this.bottles.push(bottle);
         }
     }
 
     collectBottle() {
         if (this.collectedBottles < 10) {
-            this.collectedBottles += 1; 
-            this.bottlesStatusBar.setPercentage((this.collectedBottles / 10) * 100); 
+            this.collectedBottles += 1;
+            this.bottlesStatusBar.setPercentage((this.collectedBottles / 10) * 100);
         }
     }
-    
+
     checkBottleCollisions() {
         this.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.collectBottle();
-                this.bottles.splice(index, 1); 
+                this.bottles.splice(index, 1);
             }
         });
     }
@@ -136,7 +145,7 @@ class World {
 
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.coins); 
+        this.addObjectsToMap(this.coins);
         this.addObjectsToMap(this.bottles);
         this.addObjectsToMap(this.throwableObject);
 
