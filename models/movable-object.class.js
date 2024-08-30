@@ -58,6 +58,7 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
+        this.dead_sound.play();
     }
 
     playAnimation(images) {

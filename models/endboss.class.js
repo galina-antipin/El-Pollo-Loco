@@ -14,6 +14,13 @@ y = -20;
         'img/4_enemie_boss_chicken/2_alert/G12.png',
     ];
 
+    IMAGES_INTRO = [
+        'img/4_enemie_boss_chicken/1_walk/G1.png',
+        'img/4_enemie_boss_chicken/1_walk/G2.png',
+        'img/4_enemie_boss_chicken/1_walk/G3.png',
+        'img/4_enemie_boss_chicken/1_walk/G4.png',
+    ];
+
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -26,4 +33,6 @@ y = -20;
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
      }
+
+
 } 

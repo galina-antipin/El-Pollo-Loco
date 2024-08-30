@@ -53,17 +53,9 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                console.log('Kollision erkannt');
-                console.log('Character Y:', this.character.y);
-                console.log('Character Höhe:', this.character.height);
-                console.log('Enemy Y:', enemy.y);
-                console.log('Enemy Höhe:', enemy.height);
-    
                 if (this.character.y + this.character.height +20 < enemy.y + enemy.height || this.isDead) {
-                    console.log('Tampering with dead image!');
                     enemy.changeToDeadImage();
                 } else {
-                    console.log('Charakter hat getroffen!');
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
                 }
@@ -143,6 +135,10 @@ class World {
         this.addToMap(this.endbossStatusBar);
         this.ctx.translate(this.camera_x, 0);
 
+        if (this.character.isDead()) {
+            this.showGameOver();
+            return; }
+
         this.addToMap(this.character);
 
         this.addObjectsToMap(this.level.clouds);
@@ -188,5 +184,43 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+
+    checkDistanceAndChase() {
+        if (Math.abs(this.x - this.world.character.x) < 250) {
+            this.chaseCharacter();
+        } else {
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+    }
+
+    chaseCharacter() {
+        if (this.x > this.world.character.x) {
+            this.x -= this.speed;
+            this.playAnimation(this.IMAGES_INTRO);
+        } else {
+            this.x += this.speed;
+            this.playAnimation(this.IMAGES_INTRO);
+        }
+    }
+
+    showGameOver() {
+        const gameOverImage = new Image();
+        gameOverImage.src = 'img/9_intro_outro_screens/game_over/oh no you lost!.png';
+        gameOverImage.onload = () => {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); 
+
+            const imgX = this.character.x - (gameOverImage.width * 0.50 / 2) +289; 
+            const imgY = this.character.y - (gameOverImage.height * 0.50 / 2) + 80; 
+        
+            const scaledWidth = gameOverImage.width * 0.50;
+            const scaledHeight = gameOverImage.height * 0.50;
+
+            this.ctx.drawImage(gameOverImage, imgX, imgY, scaledWidth, scaledHeight);
+        };
+        
+        this.level.enemies = [];
+        this.coins = [];
+        this.bottles = [];
+        this.throwableObject = [];}
 
 }

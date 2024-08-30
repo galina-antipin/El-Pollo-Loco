@@ -1,6 +1,6 @@
 class Character extends MovableObject {
     height = 250;
-    y = 80;
+    y = 70;
     speed = 10;
     isWalking = false; 
     IMAGES_WALKING = [
@@ -69,6 +69,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_IDLE);
         this.applyGravity();
         this.animate();
     }

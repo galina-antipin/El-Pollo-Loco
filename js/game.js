@@ -107,3 +107,16 @@ function throwItem() {
        world.collectedBottles--;
    }
 }
+
+window.addEventListener('resize', function() {
+    const rotateWarning = document.getElementById('rotate-warning');
+    if (window.innerWidth <= 666) {
+        rotateWarning.classList.remove('opacity-none');
+        setTimeout(() => {
+            rotateWarning.classList.add('opacity-none');
+        }, 2000);
+    } else {
+        rotateWarning.classList.add('opacity-none');
+    }
+})
+;

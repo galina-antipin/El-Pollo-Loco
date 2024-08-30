@@ -49,22 +49,26 @@
     </div>
 
     <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>
-    <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
-    <div class="navigation-wrapper d-none" id="nav-wrapper">
-        <div class="navigation-bar d-none" id="nav-bar">
-            <div class="nav-arrows">
-                <button id="left-arrow" onmousedown="moveLeft()" onmouseup="stopMoving()" ontouchstart="moveLeft()"
-                    ontouchend="stopMoving()">&lt;</button>
-                <button id="right-arrow" onmousedown="moveRight()" onmouseup="stopMoving()" ontouchstart="moveRight()"
-                    ontouchend="stopMoving()">&gt;</button>
-            </div>
-            <div class="nav-controls">
-                <button id="jump-button" onclick="jump()" ontouchstart="jump()" ontouchend="stopJump()">Jump</button>
-                <button id="throw-button" onclick="throwItem()" ontouchstart="throwItem()"
-                    ontouchend="stopThrow()">Throw</button>
+
+        <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
+        <div class="navigation-wrapper d-none" id="nav-wrapper">
+            <div class="navigation-bar d-none" id="nav-bar">
+                <div class="nav-arrows">
+                    <button id="left-arrow" onmousedown="moveLeft()" onmouseup="stopMoving()" ontouchstart="moveLeft()"
+                        ontouchend="stopMoving()">&lt;</button>
+                    <button id="right-arrow" onmousedown="moveRight()" onmouseup="stopMoving()"
+                        ontouchstart="moveRight()" ontouchend="stopMoving()">&gt;</button>
+                </div>
+                <div class="nav-controls">
+                    <button id="jump-button" onclick="jump()" ontouchstart="jump()"
+                        ontouchend="stopJump()">Jump</button>
+                    <button id="throw-button" onclick="throwItem()" ontouchstart="throwItem()"
+                        ontouchend="stopThrow()">Throw</button>
+                </div>
             </div>
         </div>
-    </div>
+ 
+    <div class="rotate-warning opacity-none" id="rotate-warning">Bitte drehen Sie Ihr Handy!</div>
 </body>
 
 </html>
