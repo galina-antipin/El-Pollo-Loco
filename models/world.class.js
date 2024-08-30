@@ -59,7 +59,7 @@ class World {
                 console.log('Enemy Y:', enemy.y);
                 console.log('Enemy Höhe:', enemy.height);
     
-                if (this.character.y + this.character.height < enemy.y + enemy.height) {
+                if (this.character.y + this.character.height +20 < enemy.y + enemy.height || this.isDead) {
                     console.log('Tampering with dead image!');
                     enemy.changeToDeadImage();
                 } else {

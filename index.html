@@ -12,6 +12,7 @@
     <script src="models/coins.class.js"></script>
     <script src="models/bottles.class.js"></script>
     <script src="models/chicken.class.js"></script>
+    <script src="models/chicken-small.class.js"></script>
     <script src="models/status-bar.class.js"></script>
     <script src="models/coins-statusbar.class.js"></script>
     <script src="models/statusbar-bottles.js"></script>
@@ -44,22 +45,24 @@
                 <div class="impressum" onclick="showImpressum()"><span>Impressum</span></div>
             </a>
         </footer>
+
     </div>
+
     <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>
     <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
-    <div class="navigation-bar">
-        <div class="nav-arrows">
-            <button id="left-arrow" onmousedown="moveLeft()" onmouseup="stopMoving()" ontouchstart="moveLeft()"
-                ontouchend="stopMoving()">
-                < </button>
-                    <button id="right-arrow" onmousedown="moveRight()" onmouseup="stopMoving()"
-                        ontouchstart="moveRight()" ontouchend="stopMoving()">
-                        > </button>
-        </div>
-        <div class="nav-controls">
-            <button id="jump-button" onclick="jump()" ontouchstart="jump()" ontouchend="stopJump()">Jump</button>
-            <button id="throw-button" onclick="throwItem()" ontouchstart="throwItem()"
-                ontouchend="stopThrow()">Throw</button>
+    <div class="navigation-wrapper d-none" id="nav-wrapper">
+        <div class="navigation-bar d-none" id="nav-bar">
+            <div class="nav-arrows">
+                <button id="left-arrow" onmousedown="moveLeft()" onmouseup="stopMoving()" ontouchstart="moveLeft()"
+                    ontouchend="stopMoving()">&lt;</button>
+                <button id="right-arrow" onmousedown="moveRight()" onmouseup="stopMoving()" ontouchstart="moveRight()"
+                    ontouchend="stopMoving()">&gt;</button>
+            </div>
+            <div class="nav-controls">
+                <button id="jump-button" onclick="jump()" ontouchstart="jump()" ontouchend="stopJump()">Jump</button>
+                <button id="throw-button" onclick="throwItem()" ontouchstart="throwItem()"
+                    ontouchend="stopThrow()">Throw</button>
+            </div>
         </div>
     </div>
 </body>

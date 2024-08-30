@@ -6,6 +6,8 @@ let character;
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+    document.getElementById('nav-wrapper').classList.remove('d-none');
+    document.getElementById('nav-bar').classList.remove('d-none');
     const gameSound = document.getElementById('game-sound');
     gameSound.play();
     setTimeout(() => {
@@ -94,7 +96,6 @@ function moveRight() {
 }
 
 function jump() {
-
        character.jump(); 
    
 }

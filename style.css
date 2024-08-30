@@ -21,15 +21,18 @@ a {
     color: inherit;
 }
 
-/* Start Screen CSS*/
-#start-screen {
-    position: relative;
-    text-align: center;
+.d-none {
+    display: none;
 }
 
-#start-screen img {
+/* Start Screen CSS*/
+
+.start-screen {
     width: 750px;
-    height: 480px;
+}
+
+.start-screen img {
+    width: 100%;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
@@ -39,6 +42,7 @@ a {
 footer {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .impressum,
@@ -71,6 +75,7 @@ footer {
     position: absolute;
     left: 50%;
     top: 50%;
+    top:30%;
     transform: translate(-50%, -50%);
     padding: 10px 20px;
     font-size: 24px;
@@ -98,6 +103,11 @@ footer {
 
 /* Navigation Bar CSS */
 
+.navigation-wrapper {
+    z-index: 10;
+    width: 720px;
+}
+
 .navigation-bar button {
     padding: 10px 15px;
     color: rgb(100, 31, 31);
@@ -109,23 +119,18 @@ footer {
 }
 
 .navigation-bar {
-    position: absolute;
-    bottom: 285px;
-    left: 50px;
-    right: 50px;
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    width: 720px;
     z-index: 10;
 }
 
 /* canvas CSS*/
 
 canvas {
-    display: block;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    position: relative;
     z-index: 1;
 }
 
@@ -142,6 +147,7 @@ h1 {
 
 .impressum-wrapper,
 .instructions-wrapper {
+    max-width: 1920px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -164,14 +170,14 @@ h4 {
     font-size: 32px;
 }
 
-/* Impressum/Instructions css ends*/
+/* Media Querry*/
 
 @media only screen and (max-width:720px) {
     canvas {
         width: 100%;
     }
 
-    .start-screen img {
+    .start-screen  {
         width: 100%;
         height: 100vh;
     }
@@ -190,5 +196,6 @@ h4 {
     .start-screen img {
         width: 100%;
         height: 100vh;
-        
-    }}
+
+    }
+}
