@@ -52,12 +52,11 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-
             if (enemy.isDead) {
                 return; 
             }
             if (this.character.isColliding(enemy)) {
-                if (this.character.y + this.character.height  < enemy.y + enemy.height || this.isDead) {
+                if (this.character.y + this.character.height < enemy.y + enemy.height || this.isDead) {
                     enemy.changeToDeadImage();
                 } else {
                     this.character.hit();
@@ -65,12 +64,18 @@ class World {
                 }
             }
         });
-
+    
         this.throwableObject.forEach((bottle, bottleIndex) => {
             this.level.enemies.forEach((enemy, enemyIndex) => {
                 if (bottle.isColliding(enemy)) {
-                    enemy.changeToDeadImage(); 
-                    this.throwableObject.splice(bottleIndex, 1); 
+                    enemy.hit(); // Method to decrease the health, you can implement this below
+                    enemy.changeToHurtImage(); // Show hurt images
+                    this.throwableObject.splice(bottleIndex, 1); // Remove the thrown bottle
+                    enemy.energy -= 20; // or any value according to the damage
+                    if (enemy.energy <= 0) { 
+                        enemy.energy = 0; 
+                        enemy.changeToDeadImage();
+                    }
                 }
             });
         });

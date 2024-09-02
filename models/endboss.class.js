@@ -1,8 +1,8 @@
 class Endboss extends MovableObject {
 
-height = 500;
-width = 300;
-y = -20;
+    height = 500;
+    width = 300;
+    y = -20;
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -21,9 +21,23 @@ y = -20;
         'img/4_enemie_boss_chicken/1_walk/G4.png',
     ];
 
+    IMAGES_HURT = [
+        'img/4_enemie_boss_chicken/4_hurt/G21.png',
+        'img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'img/4_enemie_boss_chicken/4_hurt/G23.png',
+    ];
+
+    IMAGES_DEAD = [
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png',
+    ];
+
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_HURT); 
+        this.loadImages(this.IMAGES_DEAD); 
         this.x = 5000;
         this.animate();
     }
@@ -32,7 +46,27 @@ y = -20;
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
-     }
+    }
 
+    changeToHurtImage() {
+        this.playAnimation(this.IMAGES_HURT);
+    }
 
-} 
+    changeToDeadImage() {
+        this.playAnimation(this.IMAGES_DEAD);
+        this.isDead = true; // Mark as dead to prevent further animation
+    }
+
+    hit() {
+        this.energy -= 20; // Schaden
+        this.energy = Math.max(0, this.energy); // Sicherstellen, dass die Energie nicht negativ wird
+        this.statusBar.setPercentage((this.energy / 100) * 100); // Update der Statusleiste
+
+        if (this.energy === 0) {
+            this.changeToDeadImage();
+        } else {
+            this.lastHit = new Date().getTime();
+            this.changeToHurtImage(); // Optional: Rufe die Hurt-Animation auf
+        }
+    }
+}
