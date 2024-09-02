@@ -1,6 +1,5 @@
 class World {
     character = new Character();
-    level = level1;
     canvas;
     ctx;
     keyboard;
@@ -23,6 +22,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.level = level1;
         this.populateCoins();
         this.populateBottles();
         this.draw();
@@ -54,7 +54,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (enemy.isDead) return;  
+            if (enemy.isDead) return;
     
             if (this.character.isColliding(enemy)) {
                 this.handleCharacterEnemyCollision(enemy);
@@ -62,6 +62,15 @@ class World {
         });
     
         this.throwableObject.forEach((bottle, bottleIndex) => {
+            const endboss = this.level.enemies.find(e => e instanceof Endboss); 
+    
+            if (endboss && endboss.isColliding(bottle)) {
+                endboss.hit(); 
+            
+                this.throwableObject.splice(bottleIndex, 1); 
+                this.bottle_sound.play(); 
+            }
+
             this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
                     this.handleBottleEnemyCollision(bottleIndex, enemy);

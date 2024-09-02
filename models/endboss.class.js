@@ -3,6 +3,8 @@ class Endboss extends MovableObject {
     height = 500;
     width = 300;
     y = -20;
+    energy = 100;
+    endbossStatusBar = new EndbossStatusBar();
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -54,19 +56,16 @@ class Endboss extends MovableObject {
 
     changeToDeadImage() {
         this.playAnimation(this.IMAGES_DEAD);
-        this.isDead = true; // Mark as dead to prevent further animation
+        this.isDead = true; 
     }
 
     hit() {
-        this.energy -= 20; // Schaden
-        this.energy = Math.max(0, this.energy); // Sicherstellen, dass die Energie nicht negativ wird
-        this.statusBar.setPercentage((this.energy / 100) * 100); // Update der Statusleiste
+        this.energy -= 20; 
+        this.endbossStatusBar.setPercentage((this.energy / 20) * 100);  
+          this.changeToHurtImage();
 
-        if (this.energy === 0) {
-            this.changeToDeadImage();
-        } else {
-            this.lastHit = new Date().getTime();
-            this.changeToHurtImage(); // Optional: Rufe die Hurt-Animation auf
-        }
-    }
+        if (this.energy == 0) {
+            this.changeToDeadImage(); 
+        } 
+    } 
 }
