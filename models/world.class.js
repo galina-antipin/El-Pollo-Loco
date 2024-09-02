@@ -61,6 +61,15 @@ class World {
                 }
             }
         });
+
+        this.throwableObject.forEach((bottle, bottleIndex) => {
+            this.level.enemies.forEach((enemy, enemyIndex) => {
+                if (bottle.isColliding(enemy)) {
+                    enemy.changeToDeadImage(); 
+                    this.throwableObject.splice(bottleIndex, 1); 
+                }
+            });
+        });
     }
     
     populateCoins() {

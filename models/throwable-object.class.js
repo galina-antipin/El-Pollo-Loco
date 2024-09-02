@@ -19,6 +19,13 @@ class ThrowableObject extends MovableObject {
         this.startAnimation();
     }
 
+    isColliding(mo) {
+        return (this.x + this.width > mo.x && 
+                this.x < mo.x + mo.width && 
+                this.y + this.height > mo.y && 
+                this.y < mo.y + mo.height);
+    }
+
     throw() {
         this.speedY = 30;
         this.applyGravity();
