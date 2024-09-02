@@ -24,6 +24,7 @@ function init() {
 }
 
 window.addEventListener('keydown', (e) => {
+    if (character.isDead()) return;
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
     }
@@ -50,6 +51,7 @@ window.addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('keyup', (e) => {
+    if (character.isDead()) return;
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
     }
@@ -75,6 +77,7 @@ window.addEventListener('keyup', (e) => {
 });
 
 function stopMoving() {
+    if (character.isDead()) return;
     keyboard.RIGHT = false;
     keyboard.LEFT = false;
 }
@@ -101,6 +104,7 @@ function jump() {
 }
 
 function throwItem() {
+    if (character.isDead()) return;
    if (world.collectedBottles > 0) {
        let bottle = new ThrowableObject(character.x, character.y); 
        world.throwableObject.push(bottle);
