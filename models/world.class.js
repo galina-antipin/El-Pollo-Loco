@@ -12,6 +12,8 @@ class World {
     coins = [];
     collectedCoins = 0;
     collect_sound = new Audio('audio/collect-coin.mp3');
+    chicken_dead_sound = new Audio('audio/chicken-dead.mp3');
+    bottle_sound = new Audio('audio/bottle.mp3');
     bottles = [];
     collectedBottles = 0;
     bottlesStatusBar = new BottlesStatusBar();
@@ -52,33 +54,39 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (enemy.isDead) {
-                return; 
-            }
+            if (enemy.isDead) return;  
+    
             if (this.character.isColliding(enemy)) {
-                if (this.character.y + this.character.height < enemy.y + enemy.height || this.isDead) {
-                    enemy.changeToDeadImage();
-                } else {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                }
+                this.handleCharacterEnemyCollision(enemy);
             }
         });
     
         this.throwableObject.forEach((bottle, bottleIndex) => {
-            this.level.enemies.forEach((enemy, enemyIndex) => {
+            this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
-                    enemy.hit(); // Method to decrease the health, you can implement this below
-                    enemy.changeToHurtImage(); // Show hurt images
-                    this.throwableObject.splice(bottleIndex, 1); // Remove the thrown bottle
-                    enemy.energy -= 20; // or any value according to the damage
-                    if (enemy.energy <= 0) { 
-                        enemy.energy = 0; 
-                        enemy.changeToDeadImage();
-                    }
+                    this.handleBottleEnemyCollision(bottleIndex, enemy);
                 }
             });
         });
+    }
+    
+    handleCharacterEnemyCollision(enemy) {
+        const isCharacterAboveEnemy = this.character.y + this.character.height < enemy.y + enemy.height;
+        
+        if (isCharacterAboveEnemy || this.isDead) {
+            this.chicken_dead_sound.play();
+            enemy.changeToDeadImage();
+        } else {
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
+        }
+    }
+    
+    handleBottleEnemyCollision(bottleIndex, enemy) {
+        this.bottle_sound.play();
+        this.throwableObject.splice(bottleIndex, 1);
+            enemy.changeToDeadImage();
+            this.chicken_dead_sound.play(); 
     }
     
     populateCoins() {
