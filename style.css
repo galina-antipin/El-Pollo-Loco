@@ -115,6 +115,7 @@ footer {
     position: absolute;
     bottom: 25%;
     transform: translateX(-50%);
+    opacity: 0;
 }
 
 .navigation-bar button {
@@ -126,6 +127,18 @@ footer {
     border-radius: 50px;
     cursor: pointer;
 }
+
+.pause-game {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        width: 720px;
+        z-index: 10;
+        position: absolute;
+        bottom: 25%;
+        transform: translateX(-50%);
+    }
+
 
 /* canvas CSS*/
 
@@ -218,6 +231,7 @@ h4 {
 
     .navigation-bar {
         width: 100%;
+        opacity: 100;
     }
 
 }

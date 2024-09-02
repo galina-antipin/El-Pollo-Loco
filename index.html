@@ -49,10 +49,10 @@
     </div>
 
     <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>
-
+<div class="pause-game"><button id="pause-button" class="pause-button d-none">Pause</button></div>
         <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
-        <div class="navigation-wrapper d-none" id="nav-wrapper">
-            <div class="navigation-bar d-none" id="nav-bar">
+        <div class="navigation-wrapper" id="nav-wrapper">
+            <div class="navigation-bar" id="nav-bar">
                 <div class="nav-arrows">
                     <button id="left-arrow" onmousedown="moveLeft()" onmouseup="stopMoving()" ontouchstart="moveLeft()"
                         ontouchend="stopMoving()">&lt;</button>
@@ -68,7 +68,7 @@
             </div>
         </div>
  
-    <div class="rotate-warning opacity-none" id="rotate-warning">Bitte drehen Sie Ihr Handy!</div>
+    <div class="rotate-warning opacity-none" id="rotate-warning">Turn your Device to play</div>
 </body>
 
 </html>
