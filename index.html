@@ -35,39 +35,35 @@
         <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="Start Screen">
         <button id="start-btn" onclick="startGame()">Start Game</button>
         <footer>
-            <a href="instructions.html">
-                <div class="instructions">
+            <div class="instructions">
+                <a href="instructions.html" >
                     <span>Instructions</span>
-                </div>
-            </a>
+                </a>
+            </div>
             <div class="space-between"></div>
-            <a href="impressum.html">
-                <div class="impressum" onclick="showImpressum()"><span>Impressum</span></div>
-            </a>
+            <div class="impressum"><a href="impressum.html" onclick="showImpressum()">
+                    <span>Impressum</span>
+                </a></div>
         </footer>
 
     </div>
 
     <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>
-<div class="pause-game"><button id="pause-button" class="pause-button d-none">Pause</button></div>
-        <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
-        <div class="navigation-wrapper" id="nav-wrapper">
-            <div class="navigation-bar" id="nav-bar">
-                <div class="nav-arrows">
-                    <button id="left-arrow" ontouchstart="moveLeft()"
-                        ontouchend="stopMoving()">&lt;</button>
-                    <button id="right-arrow"
-                        ontouchstart="moveRight()" ontouchend="stopMoving()">&gt;</button>
-                </div>
-                <div class="nav-controls">
-                    <button id="jump-button" ontouchstart="jump()"
-                        ontouchend="stopJump()">Jump</button>
-                    <button id="throw-button"  ontouchstart="throwItem()"
-                        ontouchend="stopThrow()">Throw</button>
-                </div>
+    <div class="pause-game"><button id="pause-button" class="pause-button d-none">Pause</button></div>
+    <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
+    <div class="navigation-wrapper" id="nav-wrapper">
+        <div class="navigation-bar" id="nav-bar">
+            <div class="nav-arrows">
+                <button id="left-arrow" ontouchstart="moveLeft()" ontouchend="stopMoving()">&lt;</button>
+                <button id="right-arrow" ontouchstart="moveRight()" ontouchend="stopMoving()">&gt;</button>
+            </div>
+            <div class="nav-controls">
+                <button id="jump-button" ontouchstart="jump()" ontouchend="stopJump()">Jump</button>
+                <button id="throw-button" ontouchstart="throwItem()" ontouchend="stopThrow()">Throw</button>
             </div>
         </div>
- 
+    </div>
+
     <div class="rotate-warning opacity-none" id="rotate-warning">Turn your Device to play</div>
 </body>
 

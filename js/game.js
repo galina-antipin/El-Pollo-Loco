@@ -18,6 +18,7 @@ function startGame() {
 }
 
 function init() {
+    initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     character = world.character;
