@@ -57,7 +57,7 @@ class World {
                 return; 
             }
             if (this.character.isColliding(enemy)) {
-                if (this.character.y + this.character.height +20 < enemy.y + enemy.height || this.isDead) {
+                if (this.character.y + this.character.height  < enemy.y + enemy.height || this.isDead) {
                     enemy.changeToDeadImage();
                 } else {
                     this.character.hit();
@@ -196,24 +196,6 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
-    }
-
-    checkDistanceAndChase() {
-        if (Math.abs(this.x - this.world.character.x) < 250) {
-            this.chaseCharacter();
-        } else {
-            this.playAnimation(this.IMAGES_WALKING);
-        }
-    }
-
-    chaseCharacter() {
-        if (this.x > this.world.character.x) {
-            this.x -= this.speed;
-            this.playAnimation(this.IMAGES_INTRO);
-        } else {
-            this.x += this.speed;
-            this.playAnimation(this.IMAGES_INTRO);
-        }
     }
 
     showGameOver() {
