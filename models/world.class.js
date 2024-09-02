@@ -52,6 +52,10 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
+
+            if (enemy.isDead) {
+                return; 
+            }
             if (this.character.isColliding(enemy)) {
                 if (this.character.y + this.character.height +20 < enemy.y + enemy.height || this.isDead) {
                     enemy.changeToDeadImage();
