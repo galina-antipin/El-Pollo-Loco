@@ -25,21 +25,32 @@ class Endboss extends MovableObject {
 
     IMAGES_HURT = [
         'img/4_enemie_boss_chicken/4_hurt/G21.png',
+        'img/4_enemie_boss_chicken/4_hurt/G21.png',
+        'img/4_enemie_boss_chicken/4_hurt/G21.png',
         'img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'img/4_enemie_boss_chicken/4_hurt/G23.png',
+        'img/4_enemie_boss_chicken/4_hurt/G23.png',
         'img/4_enemie_boss_chicken/4_hurt/G23.png',
     ];
 
     IMAGES_DEAD = [
         'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
         'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_HURT); 
-        this.loadImages(this.IMAGES_DEAD); 
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 5000;
         this.animate();
     }
@@ -51,21 +62,28 @@ class Endboss extends MovableObject {
     }
 
     changeToHurtImage() {
-        this.playAnimation(this.IMAGES_HURT);
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_HURT);
+        }, 2000);
     }
 
     changeToDeadImage() {
-        this.playAnimation(this.IMAGES_DEAD);
-        this.isDead = true; 
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_DEAD);
+        }, 200); this.isDead = true;
     }
 
+
+
     hit() {
-        this.energy -= 20; 
-        this.endbossStatusBar.setPercentage((this.energy / 20) * 100);  
-          this.changeToHurtImage();
+        this.energy -= 20;
+        this.endbossStatusBar.setPercentage((this.energy / 20) * 100);
+        this.setPercentage();
+        this.changeToHurtImage();
+
 
         if (this.energy == 0) {
-            this.changeToDeadImage(); 
-        } 
-    } 
+            this.changeToDeadImage();
+        }
+    }
 }

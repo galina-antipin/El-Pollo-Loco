@@ -171,7 +171,9 @@ class World {
         this.addToMap(this.endbossStatusBar);
         this.ctx.translate(this.camera_x, 0);
         if (this.character.isDead()) {
+    
             this.lostImage.drawBesideCharacter(this.ctx, this.character.x, this.character.y);
+            document.getElementById('gameOverMenu').style.display = 'block'; 
             return; 
         }
         this.addToMap(this.character);

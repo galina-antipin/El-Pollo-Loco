@@ -13,12 +13,12 @@ function startGame() {
     setTimeout(() => {
         gameSound.pause();
         gameSound.currentTime = 0;
-    }, 7001);
+    }, 7001);   
+    initLevel();
     init();
 }
 
 function init() {
-    initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     character = world.character;
@@ -124,4 +124,20 @@ window.addEventListener('resize', function() {
         rotateWarning.classList.add('opacity-none');
     }
 })
-;
+
+//clearAllIntervals() {
+  //  for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  //}
+
+  let soundsMuted = false;
+
+  function muteSound() {
+      soundsMuted = !soundsMuted;
+      const audioElements = document.querySelectorAll('audio');
+      audioElements.forEach(audio => {
+          audio.muted = soundsMuted; // Mute oder unmute den Sound
+      });
+
+      // Update Button Text
+      document.getElementById('mute-button').textContent = soundsMuted ? 'Unmute Sounds' : 'Mute Sounds';
+  }

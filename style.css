@@ -216,9 +216,34 @@ h4 {
     pointer-events: none;
 }
 
+#gameOverMenu button {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f6ad4e;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #f6ad4e;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#gameOverMenu button:hover {
+   background-color: #ff5722;
+}
+
+.mute-button {
+    position: absolute;
+    top: 10px; /* Passe die Position nach Bedarf an */
+    right: 10px; /* Passe die Position nach Bedarf an */
+    z-index: 100; /* Damit der Button über anderen Inhalten liegt */
+}
+
 /* Media Querry*/
 
-@media only screen and (max-width:720px) {
+@media only screen and (max-width: 720px) {
 
     canvas {
         width: 100%;

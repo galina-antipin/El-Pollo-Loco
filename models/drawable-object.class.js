@@ -25,6 +25,7 @@ class DrawableObject {
             ctx.stroke();
         }
     }
+    
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
