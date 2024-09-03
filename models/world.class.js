@@ -17,6 +17,8 @@ class World {
     collectedBottles = 0;
     bottlesStatusBar = new BottlesStatusBar();
     endbossStatusBar = new EndbossStatusBar();
+    isGameOver = false; 
+    lostImage;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -32,6 +34,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.lostImage = new LostImage();
     }
 
     run() {
@@ -159,9 +162,7 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
@@ -169,21 +170,17 @@ class World {
         this.addToMap(this.bottlesStatusBar);
         this.addToMap(this.endbossStatusBar);
         this.ctx.translate(this.camera_x, 0);
-
         if (this.character.isDead()) {
-            this.showGameOver();
-            return; }
-
+            this.lostImage.drawBesideCharacter(this.ctx, this.character.x, this.character.y);
+            return; 
+        }
         this.addToMap(this.character);
-
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.coins);
         this.addObjectsToMap(this.bottles);
         this.addObjectsToMap(this.throwableObject);
-
         this.ctx.translate(-this.camera_x, 0);
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
@@ -220,24 +217,12 @@ class World {
         this.ctx.restore();
     }
 
-    showGameOver() {
-        const gameOverImage = new Image();
-        gameOverImage.src = 'img/9_intro_outro_screens/game_over/oh no you lost!.png';
-        gameOverImage.onload = () => {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); 
-
-            const imgX = this.character.x - (gameOverImage.width * 0.50 / 2) +289; 
-            const imgY = this.character.y - (gameOverImage.height * 0.50 / 2) + 80; 
-        
-            const scaledWidth = gameOverImage.width * 0.50;
-            const scaledHeight = gameOverImage.height * 0.50;
-
-            this.ctx.drawImage(gameOverImage, imgX, imgY, scaledWidth, scaledHeight);
-        };
-        
+    clearGameObjects() {
         this.level.enemies = [];
         this.coins = [];
         this.bottles = [];
-        this.throwableObject = [];}
+        this.throwableObject = [];
+        this.level.character = [];
+    }
 
 }
