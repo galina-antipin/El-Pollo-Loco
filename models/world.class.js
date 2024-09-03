@@ -97,8 +97,12 @@ class World {
     handleBottleEnemyCollision(bottleIndex, enemy) {
         this.bottle_sound.play();
         this.throwableObject.splice(bottleIndex, 1);
+        if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
             enemy.changeToDeadImage();
-            this.chicken_dead_sound.play(); 
+            this.chicken_dead_sound.play(); }
+            if (enemy instanceof Endboss) {
+                enemy.playAnimation(enemy.IMAGES_HURT);
+            }
     }
     
     populateCoins() {

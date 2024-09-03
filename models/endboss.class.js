@@ -70,7 +70,6 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved()) {
                 this.playAnimation(this.IMAGES_WALKING);
-                this.endbossBarSize();
             } else {
                 this.playAnimation(this.IMAGES_ALERT);
             }
@@ -79,12 +78,8 @@ class Endboss extends MovableObject {
     }
 
     updateStatusBar() {
-        const percentage = (this.energy / 100) * 100; 
+        const percentage = (this.energy / 20) * 100; 
         this.endbossStatusBar.setPercentage(percentage);
-    }
-
-    endbossBarSize() {
-        world.endbossStatusBar.width = 250;
     }
 
     distanceTooClose() {
