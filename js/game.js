@@ -6,8 +6,8 @@ let character;
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-    document.getElementById('nav-wrapper').classList.remove('d-none');
-    document.getElementById('nav-bar').classList.remove('d-none');
+    document.getElementById('footer').style.display = 'none';
+
     const gameSound = document.getElementById('game-sound');
     gameSound.play();
     setTimeout(() => {
@@ -113,22 +113,6 @@ function throwItem() {
    }
 }
 
-let isRotateWarningVisible = false;
-
-window.addEventListener('resize', function() {
-    const rotateWarning = document.getElementById('rotate-warning');
-
-    if (window.innerWidth <= 720 && !isRotateWarningVisible) {
-        rotateWarning.classList.remove('opacity-none'); 
-        isRotateWarningVisible = true; 
-    } 
-    
-    if (window.innerWidth > 667 && isRotateWarningVisible) {
-        rotateWarning.classList.add('opacity-none');
-        
-        isRotateWarningVisible = false;
-    }
-});
 
 //clearAllIntervals() {
   //  for (let i = 1; i < 9999; i++) window.clearInterval(i);
@@ -138,11 +122,15 @@ window.addEventListener('resize', function() {
 
   function muteSound() {
       soundsMuted = !soundsMuted;
-      const audioElements = document.querySelectorAll('Audio');
+      const audioElements = document.querySelectorAll('audio');
       audioElements.forEach(audio => {
-          audio.muted = soundsMuted; // Mute oder unmute den Sound
+          audio.muted = soundsMuted; 
       });
-
-      // Update Button Text
-      document.getElementById('mute-button').textContent = soundsMuted ? 'Unmute Sounds' : 'Mute Sounds';
+  
+      const muteButton = document.getElementById('mute-button');
+      if (soundsMuted) {
+          muteButton.src = './img/sound-off.svg'; 
+      } else {
+          muteButton.src = './img/sound-on.svg';
+      }
   }
