@@ -113,17 +113,22 @@ function throwItem() {
    }
 }
 
+let isRotateWarningVisible = false;
+
 window.addEventListener('resize', function() {
     const rotateWarning = document.getElementById('rotate-warning');
-    if (window.innerWidth <= 666) {
-        rotateWarning.classList.remove('opacity-none');
-        setTimeout(() => {
-            rotateWarning.classList.add('opacity-none');
-        }, 2000);
-    } else {
+
+    if (window.innerWidth <= 720 && !isRotateWarningVisible) {
+        rotateWarning.classList.remove('opacity-none'); 
+        isRotateWarningVisible = true; 
+    } 
+    
+    if (window.innerWidth > 667 && isRotateWarningVisible) {
         rotateWarning.classList.add('opacity-none');
+        
+        isRotateWarningVisible = false;
     }
-})
+});
 
 //clearAllIntervals() {
   //  for (let i = 1; i < 9999; i++) window.clearInterval(i);
@@ -133,7 +138,7 @@ window.addEventListener('resize', function() {
 
   function muteSound() {
       soundsMuted = !soundsMuted;
-      const audioElements = document.querySelectorAll('audio');
+      const audioElements = document.querySelectorAll('Audio');
       audioElements.forEach(audio => {
           audio.muted = soundsMuted; // Mute oder unmute den Sound
       });
