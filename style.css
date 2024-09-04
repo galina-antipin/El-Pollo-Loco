@@ -243,7 +243,7 @@ h4 {
     z-index: 25;
 }
 
-.backToStartScreen-btn {
+#gameOverMenu button {
     position: absolute;
     top: 80%;
     left: 50%;
@@ -257,12 +257,11 @@ h4 {
     z-index: 2;
 }
 
-.backToStartScreen-btn:hover {
+#gameOverMenu button:hover {
     background-color: #ff5722;
 }
 
 /* win screen*/
-
 #win-screen {
     background-image: url('img/9_intro_outro_screens/win/win_2.png');
     background-position: top;
@@ -275,6 +274,24 @@ h4 {
     right: 0;
     width: 100%;
     z-index: 25;
+}
+
+#win-screen button {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f6ad4e;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #f6ad4e;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#win-screen button:hover {
+    background-color: #ff5722;
 }
 
 /* Media Querry*/

@@ -4,21 +4,27 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new Statusbar();
-    coinsStatusBar = new CoinsStatusbar();
+
     throwableObject = [];
-    game_sound = new Audio('audio/taratata.mp3');
     coins = [];
     collectedCoins = 0;
-    collect_sound = new Audio('audio/collect-coin.mp3');
-    chicken_dead_sound = new Audio('audio/chicken-dead.mp3');
-    bottle_sound = new Audio('audio/bottle.mp3');
     bottles = [];
     collectedBottles = 0;
+    game_sound = new Audio('audio/taratata.mp3');
+
+    collect_sound = new Audio('audio/collect-coin.mp3');
+    chicken_dead_sound = new Audio('audio/chicken-sound.mp3');
+    win_sound = new Audio('audio/win-sound.mp3');
+    bottle_sound = new Audio('audio/bottle.mp3');
+    small_chicken_dead = new Audio('audio/chicken-dead.mp3');
+
+
     bottlesStatusBar = new BottlesStatusBar();
+    coinsStatusBar = new CoinsStatusbar();
     endbossStatusBar = new EndbossStatusBar();
-    isGameOver = false; 
-    lostImage;
+    statusBar = new Statusbar();
+
+    isGameOver = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -38,10 +44,10 @@ class World {
 
     run() {
         setInterval(() => {
-                this.checkCollisions();
-                this.checkThrowObjects();
-                this.checkCoinCollisions();
-                this.checkBottleCollisions();
+            this.checkCollisions();
+            this.checkThrowObjects();
+            this.checkCoinCollisions();
+            this.checkBottleCollisions();
         }, 100);
     }
 
@@ -57,20 +63,20 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (enemy.isDead) return;
-    
+
             if (this.character.isColliding(enemy)) {
                 this.handleCharacterEnemyCollision(enemy);
             }
         });
-    
+
         this.throwableObject.forEach((bottle, bottleIndex) => {
-            const endboss = this.level.enemies.find(e => e instanceof Endboss); 
-    
+            const endboss = this.level.enemies.find(e => e instanceof Endboss);
+
             if (endboss && endboss.isColliding(bottle)) {
-                endboss.hit(); 
-            
-                this.throwableObject.splice(bottleIndex, 1); 
-                this.bottle_sound.play(); 
+                endboss.hit();
+
+                this.throwableObject.splice(bottleIndex, 1);
+                this.bottle_sound.play();
             }
 
             this.level.enemies.forEach((enemy) => {
@@ -80,12 +86,12 @@ class World {
             });
         });
     }
-    
+
     handleCharacterEnemyCollision(enemy) {
         const isCharacterAboveEnemy = this.character.y + this.character.height < enemy.y + enemy.height;
-        
+
         if (isCharacterAboveEnemy || this.isDead) {
-            this.chicken_dead_sound.play();
+            this.small_chicken_dead.play();
             enemy.changeToDeadImage();
             this.character.jump()
         } else {
@@ -93,18 +99,20 @@ class World {
             this.statusBar.setPercentage(this.character.energy);
         }
     }
-    
+
     handleBottleEnemyCollision(bottleIndex, enemy) {
         this.bottle_sound.play();
         this.throwableObject.splice(bottleIndex, 1);
         if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
             enemy.changeToDeadImage();
-            this.chicken_dead_sound.play(); }
-            if (enemy instanceof Endboss) {
-                enemy.playAnimation(enemy.IMAGES_HURT);
-            }
+            this.small_chicken_dead.play();
+        }
+        if (enemy instanceof Endboss) {
+            enemy.playAnimation(enemy.IMAGES_HURT);
+            this.chicken_dead_sound.play();
+        }
     }
-    
+
     populateCoins() {
         let numberOfCoins = 70;
         let levelEndX = 5000;
@@ -174,7 +182,7 @@ class World {
         this.addToMap(this.bottlesStatusBar);
         this.addToMap(this.endbossStatusBar);
         this.ctx.translate(this.camera_x, 0);
-    
+
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
