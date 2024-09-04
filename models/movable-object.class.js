@@ -46,6 +46,7 @@ class MovableObject extends DrawableObject {
             this.dead_sound.play();
             this.world.isGameOver = true;
             this.world.clearGameObjects();
+            this.gameOverScreen();
         } else {
             this.lastHit = new Date().getTime();
 
@@ -80,5 +81,20 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
+
+    gameOverScreen() {
+        document.getElementById('gameOverMenu').classList.remove('d-none'); 
+        this.clearAllIntervals();
+        muteSound();
+    }
+
+    clearAllIntervals() {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
+      }
+
+      winScreen(){
+        document.getElementById('win-screen').classList.remove('d-none'); 
+        this.clearAllIntervals();
+      }
 }
 

@@ -68,6 +68,7 @@ class Endboss extends MovableObject {
                 this.speed = 0;
                 this.playAnimation(this.IMAGES_DEAD);
                 this.endbossStatusBar.setPercentage(0);
+                this.winScreen();
             } else if (this.distanceTooClose()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             } else if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved()) {

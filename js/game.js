@@ -13,7 +13,7 @@ function startGame() {
     setTimeout(() => {
         gameSound.pause();
         gameSound.currentTime = 0;
-    }, 7001);   
+    }, 7001);
     initLevel();
     init();
 }
@@ -92,45 +92,41 @@ function stopThrow() {
 }
 
 function moveLeft() {
-   keyboard.LEFT = true;  
+    keyboard.LEFT = true;
 }
 
 function moveRight() {
-   keyboard.RIGHT = true;
+    keyboard.RIGHT = true;
 }
 
 function jump() {
-       character.jump(); 
-   
+    character.jump();
+
 }
 
 function throwItem() {
     if (character.isDead()) return;
-   if (world.collectedBottles > 0) {
-       let bottle = new ThrowableObject(character.x, character.y); 
-       world.throwableObject.push(bottle);
-       world.collectedBottles--;
-   }
+    if (world.collectedBottles > 0) {
+        let bottle = new ThrowableObject(character.x, character.y);
+        world.throwableObject.push(bottle);
+        world.collectedBottles--;
+    }
 }
 
+let soundsMuted = false;
 
-//clearAllIntervals() {
-  //  for (let i = 1; i < 9999; i++) window.clearInterval(i);
-  //}
+function muteSound() {
+    soundsMuted = !soundsMuted;
+    const audioElements = document.querySelectorAll('audio');
+    audioElements.forEach(audio => {
+        audio.muted = soundsMuted;
+    });
 
-  let soundsMuted = false;
+    const muteButton = document.getElementById('mute-button');
+    if (soundsMuted) {
+        muteButton.src = './img/sound-off.svg';
+    } else {
+        muteButton.src = './img/sound-on.svg';
+    }
 
-  function muteSound() {
-      soundsMuted = !soundsMuted;
-      const audioElements = document.querySelectorAll('audio');
-      audioElements.forEach(audio => {
-          audio.muted = soundsMuted; 
-      });
-  
-      const muteButton = document.getElementById('mute-button');
-      if (soundsMuted) {
-          muteButton.src = './img/sound-off.svg'; 
-      } else {
-          muteButton.src = './img/sound-on.svg';
-      }
-  }
+}

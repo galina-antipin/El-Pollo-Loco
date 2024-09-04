@@ -34,7 +34,6 @@
     <h1>El Pollo Loco</h1>
 
     <div id="content-wrapper">
-
         <div id="start-screen" class="start-screen">
             <button id="start-btn" onclick="startGame()">Start Game</button>
         </div>
@@ -56,7 +55,11 @@
 
         <div id="gameOverMenu" class="d-none">
             <a href="index.html">
-                <button id="mainMenuButton">Back to Startscreen</button></a>
+                <button id="mainMenuButton" class="backToStartScreen-btn">Back to Startscreen</button></a>
+        </div>
+        <div id="win-screen" class="d-none">
+            <a href="index.html">
+                <button id="mainMenuButton" class="backToStartScreen-btn">Back to Startscreen</button></a>
         </div>
         <div class="overlay"> <img src="./img/sound-on.svg" alt="sound on" id="mute-button" class="mute-button"
                 onclick="muteSound()"></div>
