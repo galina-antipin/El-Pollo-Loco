@@ -66,10 +66,12 @@ a {
 }
 
 footer {
-    margin-top: 20px;
+    position: absolute;
+    bottom:0;
     display: flex;
     justify-content: center;
     width: 100%;
+    z-index: 2;
 }
 
 .impressum,
@@ -244,7 +246,7 @@ h4 {
 
 /* Media Querry*/
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 666px) {
 
     canvas {
         width: 100%;
