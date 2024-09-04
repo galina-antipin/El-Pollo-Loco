@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <title>El Pollo Loco</title>
     <script src="models/drawable-object.class.js"></script>
-    <script src="models/lost-image.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>
     <script src="models/coins.class.js"></script>
@@ -31,10 +30,11 @@
 </head>
 
 <body>
+    <div class="rotate-warning" id="rotate-warning">Turn your Device to play</div>
     <h1>El Pollo Loco</h1>
 
     <div id="content-wrapper">
-        <div class="rotate-warning" id="rotate-warning">Turn your Device to play</div>
+
         <div id="start-screen" class="start-screen">
             <button id="start-btn" onclick="startGame()">Start Game</button>
         </div>

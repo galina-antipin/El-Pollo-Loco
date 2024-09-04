@@ -34,7 +34,6 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.lostImage = new LostImage();
     }
 
     run() {
@@ -88,6 +87,7 @@ class World {
         if (isCharacterAboveEnemy || this.isDead) {
             this.chicken_dead_sound.play();
             enemy.changeToDeadImage();
+            this.character.jump()
         } else {
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
@@ -136,7 +136,7 @@ class World {
     }
 
     populateBottles() {
-        let numberOfBottles = 10;
+        let numberOfBottles = 30;
         const levelEndX = 5000;
         const levelHeight = this.canvas.height - 100;
 
@@ -174,12 +174,7 @@ class World {
         this.addToMap(this.bottlesStatusBar);
         this.addToMap(this.endbossStatusBar);
         this.ctx.translate(this.camera_x, 0);
-        if (this.character.isDead()) {
     
-            this.lostImage.drawBesideCharacter(this.ctx, this.character.x, this.character.y);
-            document.getElementById('gameOverMenu').style.display = 'block'; 
-            return; 
-        }
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);

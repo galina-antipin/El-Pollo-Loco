@@ -80,7 +80,8 @@ class Endboss extends MovableObject {
     }
 
     updateStatusBar() {
-        const percentage = (this.energy / 20) * 100; 
+        const percentage = (this.energy / 100) * 100; 
+        console.log(`Updating Status Bar. Energy: ${this.energy}, Percentage: ${percentage}`);
         this.endbossStatusBar.setPercentage(percentage);
     }
 
@@ -105,10 +106,16 @@ class Endboss extends MovableObject {
     }
 
     hit() {
-        this.energy -= 20;
-        this.updateStatusBar();
+        this.energy -= 25; 
         if (this.energy < 0) {
-            this.energy = 0;
+            this.energy = 0; 
         }
-    }
-}
+        
+        this.updateStatusBar(); 
+        this.playAnimation(this.IMAGES_HURT); 
+    
+        if (this.energy === 0) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.speed = 0; 
+        }
+    }}
