@@ -1,5 +1,5 @@
 let level1;
-function initLevel(){
+function initLevel() {
 
     level1 = new Level(
         [
@@ -21,7 +21,7 @@ function initLevel(){
             new SmallChicken(),
             new SmallChicken(),
             new Endboss(),
-          ],
+        ],
 
         [
             new Cloud(),
@@ -33,8 +33,30 @@ function initLevel(){
             new Cloud(),
             new Cloud(),
             new Cloud(),
-            
+
         ],
+
+        [
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+        ],
+   
 
         [
             new BackgroundObject('img/5_background/layers/air.png', -719),
@@ -103,4 +125,5 @@ function initLevel(){
             new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 11),
 
         ],
-    );}
+    );
+}

@@ -82,7 +82,6 @@ class Endboss extends MovableObject {
 
     updateStatusBar() {
         const percentage = (this.energy / 100) * 100; 
-        console.log(`Updating Status Bar. Energy: ${this.energy}, Percentage: ${percentage}`);
         this.endbossStatusBar.setPercentage(percentage);
     }
 

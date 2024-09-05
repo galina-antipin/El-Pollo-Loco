@@ -31,8 +31,6 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.level = level1;
-        this.populateCoins();
-        this.populateBottles();
         this.draw();
         this.setWorld();
         this.run();
@@ -40,6 +38,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.bottles = this.level.bottles;
     }
 
     run() {
@@ -113,19 +112,6 @@ class World {
         }
     }
 
-    populateCoins() {
-        let numberOfCoins = 70;
-        let levelEndX = 5000;
-        const spacing = levelEndX / numberOfCoins;
-
-        for (let i = 0; i < numberOfCoins; i++) {
-            let coin = new Coins();
-            coin.x = i * spacing + Math.random() * spacing;
-            coin.y = Math.random() * (this.canvas.height - coin.height - 20) + 20;
-            this.coins.push(coin);
-        }
-    }
-
     collectCoin() {
         if (this.collectedCoins < 50) {
             this.collectedCoins += 1;
@@ -143,18 +129,7 @@ class World {
         });
     }
 
-    populateBottles() {
-        let numberOfBottles = 30;
-        const levelEndX = 5000;
-        const levelHeight = this.canvas.height - 100;
 
-        for (let i = 0; i < numberOfBottles; i++) {
-            let bottle = new Bottles();
-            bottle.x = Math.random() * levelEndX;
-            bottle.y = Math.random() * levelHeight;
-            this.bottles.push(bottle);
-        }
-    }
 
     collectBottle() {
         if (this.collectedBottles < 10) {
@@ -187,7 +162,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.coins);
-        this.addObjectsToMap(this.bottles);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObject);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
