@@ -70,18 +70,16 @@ class World {
         });
 
         this.throwableObject.forEach((bottle, bottleIndex) => {
-            const endboss = this.level.enemies.find(e => e instanceof Endboss);
-
-            if (endboss && endboss.isColliding(bottle)) {
-                endboss.hit();
-
-                this.throwableObject.splice(bottleIndex, 1);
-                this.bottle_sound.play();
-            }
-
             this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy)) {
-                    this.handleBottleEnemyCollision(bottleIndex, enemy);
+                    if (enemy instanceof Endboss) {
+                        enemy.hit(); 
+                        this.throwableObject.splice(bottleIndex, 1);
+                        this.bottle_sound.play();
+                        this.endbossStatusBar.setPercentage(enemy.energy); 
+                    } else {
+                        this.handleBottleEnemyCollision(bottleIndex, enemy); 
+                    }
                 }
             });
         });
