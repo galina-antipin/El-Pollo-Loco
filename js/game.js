@@ -11,6 +11,7 @@ function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('footer').style.display = 'none';
+    document.getElementById('mute-btn-overlay').classList.remove('d-none');
 
     const gameSound = document.getElementById('game-sound');
     gameSound.play();
@@ -151,6 +152,8 @@ function muteSound() {
     const audioElements = document.querySelectorAll('audio');
     audioElements.forEach(audio => {
         audio.muted = soundsMuted;
+         world.muteAllSounds();
+
     });
 
     const muteButton = document.getElementById('mute-button');
@@ -158,6 +161,7 @@ function muteSound() {
         muteButton.src = './img/sound-off.svg';
     } else {
         muteButton.src = './img/sound-on.svg';
+        world.unmuteAllSounds();
     }
 }
 

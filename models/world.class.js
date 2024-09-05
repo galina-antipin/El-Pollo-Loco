@@ -276,4 +276,38 @@ class World {
         this.level.character = [];
     }
 
+    /**
+ * Mutes or unmutes all audio based on the current sound mute state.
+ */
+muteAllSounds() {
+    this.game_sound.volume = 0;
+    this.collect_sound.volume = 0;
+    this.bottle_sound.volume = 0;
+    this.small_chicken_dead.volume = 0;
+    this.chicken_dead_sound.volume = 0;
+    this.character.walking_sound.volume = 0;
+    this.character.jumping_sound.volume = 0;
+    this.character.hurt_sound.volume = 0;
+    this.character.dead_sound.volume = 0;
+    this.character.collect_sound.volume = 0;
+    this.character.snoring_sound.volume = 0;
+    this.win_sound = 0;
+    this.lost_sound = 0;
+}
+
+unmuteAllSounds() {
+    this.game_sound.volume = 1;
+    this.collect_sound.volume = 1;
+    this.bottle_sound.volume = 1;
+    this.small_chicken_dead.volume = 1;
+    this.chicken_dead_sound.volume = 1;
+    this.character.walking_sound.volume = 1;
+    this.character.jumping_sound.volume = 1;
+    this.character.hurt_sound.volume = 1;
+    this.character.dead_sound.volume = 1;
+    this.character.collect_sound.volume = 1;
+    this.character.snoring_sound.volume = 1;
+    this.win_sound = 1;
+    this.lost_sound = 1;
+}
 }
