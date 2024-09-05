@@ -30,23 +30,20 @@
 </head>
 
 <body>
-    <div class="rotate-warning" id="rotate-warning">Turn your Device to play</div>
+
     <h1>El Pollo Loco</h1>
 
-    <div id="content-wrapper">
+    <div id="content-wrapper">    
+        <div class="rotate-warning" id="rotate-warning">Turn your Device to play</div>
         <div id="start-screen" class="start-screen">
             <button id="start-btn" onclick="startGame()">Start Game</button>
         </div>
         <footer id="footer">
-            <div class="instructions">
-                <a href="instructions.html">
-                    <span>Instructions</span>
-                </a>
-            </div>
+            <span class="instructions"> <a href="instructions.html">Instructions
+                </a> </span>
             <div class="space-between"></div>
-            <div class="impressum"><a href="impressum.html">
-                    <span>Impressum</span>
-                </a></div>
+            <span class="impressum"><a href="impressum.html">Impressum </a></span>
+
         </footer>
 
         <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>

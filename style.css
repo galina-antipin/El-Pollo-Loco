@@ -10,7 +10,6 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     font-size: 32px;
-    overflow: hidden;
 }
 
 @font-face {
@@ -67,33 +66,24 @@ a {
 
 footer {
     position: absolute;
-    bottom:0;
+    bottom: 0;
     display: flex;
     justify-content: center;
     width: 100%;
-    z-index: 2;
+    z-index: 30;
+    pointer-events: auto;
 }
 
 .impressum,
 .instructions {
-    background-color: rgba(239, 197, 171, 0.8);
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: space-around;
-}
-
-.instructions span,
-.impressum span {
-    color: #92290c;
-    font-size: 24px;
-}
-
-.instructions:hover,
-.impressum:hover {
-    background-color: #f6ad4e;
     cursor: pointer;
+    color: #641e0b;
+}
+
+.impressum:hover, .instructions:hover{
+    color: black;
 }
 
 .space-between {
@@ -210,11 +200,10 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(243, 193, 129, 0.9);
+    background-color: rgba(228, 181, 119);
     color: #92290c;
     font-size: 24px;
     width: 100%;
-    height: 100vh;
     z-index: 20;
     flex-direction: column;
     transition: opacity 0.5s ease;
@@ -235,8 +224,8 @@ h4 {
     background-size: cover;
     background-repeat: no-repeat;
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     bottom: 0;
     right: 0;
     width: 100%;
@@ -265,11 +254,11 @@ h4 {
 #win-screen {
     background-image: url('img/9_intro_outro_screens/win/win_2.png');
     background-position: top;
-    background-size: cover;
+    background-size: 50%;
     background-repeat: no-repeat;
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     bottom: 0;
     right: 0;
     width: 100%;
@@ -296,15 +285,16 @@ h4 {
 
 /* Media Querry*/
 
-@media only screen and (max-width: 666px) {
+@media only screen and (max-width: 720px) {
 
     canvas {
         width: 100%;
+        border-radius: 0%;
     }
 
-    .content-wrapper {
+    #content-wrapper {
         width: 100%;
-        height: 100%;
+        height: auto;
     }
 
     .start-screen {
@@ -316,22 +306,17 @@ h4 {
         width: 100%;
         opacity: 100;
     }
-
-    .rotate-warning {
-        display: flex;
-
-        opacity: 100;
-        width: 100%;
-    }
-
-    #start-btn {opacity: 0;}
-
-    
-
 }
 
-@media (max-width: 650px){
-    canvas {display:none;
+@media (max-width: 650px) {
+    canvas {
+        display: none;
+    }
+}
+
+@media (max-width:466px) {
+    #start-btn {
+        left:50px;
     }
 }
 

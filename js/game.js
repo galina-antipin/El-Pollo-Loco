@@ -130,3 +130,15 @@ function muteSound() {
     }
 
 }
+
+function checkOrientation() {
+    const rotateWarning = document.getElementById('rotate-warning');
+    if (window.innerWidth < 720 && window.innerHeight > window.innerWidth) {
+        rotateWarning.style.opacity = 1;
+    } else {
+        rotateWarning.style.opacity = 0; 
+    }
+}
+
+window.addEventListener('resize', checkOrientation); 
+window.addEventListener('load', checkOrientation); 
