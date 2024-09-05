@@ -4,7 +4,6 @@ class Endboss extends MovableObject {
     y = -20;
     energy = 100;
     speed = 1.5;
-    endbossStatusBar = new EndbossStatusBar();
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -56,7 +55,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.x = 5000; 
         this.animate();
-        this.updateStatusBar();
         this.movement();
     }
 
@@ -76,14 +74,9 @@ class Endboss extends MovableObject {
             } else {
                 this.playAnimation(this.IMAGES_ALERT);
             }
-            this.updateStatusBar();
         }, 300);
     }
 
-    updateStatusBar() {
-        const percentage = (this.energy / 100) * 100; 
-        this.endbossStatusBar.setPercentage(percentage);
-    }
 
     distanceTooClose() {
         return this.x - world.character.x <= 150;
@@ -111,7 +104,6 @@ class Endboss extends MovableObject {
             this.energy = 0; 
         }
         
-        this.updateStatusBar(); 
         this.playAnimation(this.IMAGES_HURT); 
     
         if (this.energy === 0) {
