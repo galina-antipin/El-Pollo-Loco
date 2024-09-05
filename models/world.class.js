@@ -39,6 +39,7 @@ class World {
     setWorld() {
         this.character.world = this;
         this.bottles = this.level.bottles;
+        this.coins = this.level.coins;
     }
 
     run() {
