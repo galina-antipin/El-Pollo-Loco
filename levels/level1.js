@@ -1,6 +1,11 @@
 let level1;
-function initLevel() {
 
+/**
+ * Initializes the game level by creating an instance of the Level class,
+ * which includes arrays of various game objects such as chickens, clouds,
+ * bottles, coins, and background objects.
+ */
+function initLevel() {
     level1 = new Level(
         [
             new Chicken(),
@@ -33,7 +38,6 @@ function initLevel() {
             new Cloud(),
             new Cloud(),
             new Cloud(),
-
         ],
 
         [
@@ -80,8 +84,16 @@ function initLevel() {
             new Coin(),
             new Coin(),
             new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
         ],
-
 
         [
             new BackgroundObject('img/5_background/layers/air.png', -719),
@@ -148,7 +160,6 @@ function initLevel() {
             new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719 * 11),
             new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 11),
             new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 11),
-
         ],
     );
 }

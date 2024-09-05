@@ -5,7 +5,7 @@ class Character extends MovableObject {
     isWalking = false;
     energy = 100;
     inactivityDuration = 0;
-    isSleeping = false; 
+    isSleeping = false;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -97,21 +97,22 @@ class Character extends MovableObject {
     animate() {
         setInterval(() => {
             this.walking_sound.pause();
-
             if (!this.isSleeping) {
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
                     this.walking_sound.play();
+                    this.snoring_sound.pause();
                     this.isWalking = true;
                 } else if (this.world.keyboard.LEFT && this.x > 0) {
                     this.moveLeft();
                     this.otherDirection = true;
                     this.walking_sound.play();
+                    this.snoring_sound.pause();
                     this.isWalking = true;
-                } 
+                }
                 else {
-                    this.isWalking = false; 
+                    this.isWalking = false;
                 }
 
                 if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -122,7 +123,7 @@ class Character extends MovableObject {
 
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
-    
+
 
         setInterval(() => {
             if (this.isDead()) {
@@ -140,8 +141,9 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 } else if (this.isSleeping) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);
+                    this.snoring_sound.play();
                 } else {
-                    this.playAnimation(this.IMAGES_IDLE); 
+                    this.playAnimation(this.IMAGES_IDLE);
                 }
             }
         }, 100);
@@ -151,26 +153,26 @@ class Character extends MovableObject {
         setInterval(() => {
             if (!this.isWalking) {
                 this.inactivityDuration++;
-                
-                if (this.inactivityDuration >= 50) { 
-                    this.isSleeping = true; 
-                } 
+
+                if (this.inactivityDuration >= 50) {
+                    this.isSleeping = true;
+                }
             } else {
-                this.inactivityDuration = 0; 
-                this.isSleeping = false; 
+                this.inactivityDuration = 0;
+                this.isSleeping = false;
             }
-    
+
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE) {
-                this.isSleeping = false; 
+                this.isSleeping = false;
                 this.inactivityDuration = 0;
             }
-        }, 100); 
+        }, 100);
     }
 
     jump() {
         this.speedY = 27;
         this.jumping_sound.play();
-        this.isSleeping = false; 
+        this.isSleeping = false;
         this.inactivityDuration = 0;
     }
 }
