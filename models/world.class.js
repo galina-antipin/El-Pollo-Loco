@@ -114,9 +114,9 @@ class World {
     }
 
     collectCoin() {
-        if (this.collectedCoins < 50) {
+        if (this.collectedCoins < 5) {
             this.collectedCoins += 1;
-            this.coinsStatusBar.setPercentage((this.collectedCoins / 50) * 100);
+            this.coinsStatusBar.setPercentage((this.collectedCoins / 5) * 100);
             this.collect_sound.play();
         }
     }
@@ -130,20 +130,21 @@ class World {
         });
     }
 
-
-
     collectBottle() {
         if (this.collectedBottles < 5) {
             this.collectedBottles += 1;
             this.bottlesStatusBar.setPercentage((this.collectedBottles / 5) * 100);
         }
+
     }
 
     checkBottleCollisions() {
         this.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
-                this.collectBottle();
-                this.bottles.splice(index, 1);
+                if (this.collectedBottles < 5) {
+                    this.collectBottle();
+                    this.bottles.splice(index, 1);
+                }
             }
         });
     }
