@@ -135,7 +135,6 @@ class World {
             this.collectedBottles += 1;
             this.bottlesStatusBar.setPercentage((this.collectedBottles / 5) * 100);
         }
-
     }
 
     checkBottleCollisions() {
