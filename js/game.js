@@ -98,6 +98,99 @@ window.addEventListener('keyup', (e) => {
 });
 
 /**
+ * Initializes touch event listeners for the game control elements.
+ * These listeners enable users to control the game using touch buttons 
+ * on mobile devices.
+ * 
+ * @event
+ * @listens DOMContentLoaded
+ */
+document.addEventListener('DOMContentLoaded', (event) => {
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow');
+    const jumpButton = document.getElementById('jump-button');
+    const throwButton = document.getElementById('throw-button');
+
+    /**
+ * Starts moving left when the left arrow button is touched.
+ * 
+ * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+ */
+    leftArrow.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        keyboard.LEFT = true;
+        moveLeft();
+    });
+
+    /**
+  * Stops moving left when the left arrow button is released.
+  * 
+  * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+  */
+    leftArrow.addEventListener('touchend', (event) => {
+        keyboard.LEFT = false;
+        stopMoving();
+    });
+
+    /**
+      * Starts moving right when the right arrow button is touched.
+      * 
+      * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+      */
+    rightArrow.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        keyboard.RIGHT = true;
+        moveRight();
+    });
+
+    /**
+    * Stops moving right when the right arrow button is released.
+    * 
+    * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+    */
+    rightArrow.addEventListener('touchend', (event) => {
+        keyboard.RIGHT = false;
+        stopMoving();
+    });
+
+/**
+  * Executes the jump function when the jump button is touched.
+  * 
+  * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+  */
+    jumpButton.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        jump();
+    });
+
+/**
+ * (Currently empty) Handles the end of the jump when the jump button is released.
+ * 
+ * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+ */
+    jumpButton.addEventListener('touchend', (event) => {
+    });
+
+/**
+ * Executes the throw function when the throw button is touched.
+ * 
+ * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+ */
+    throwButton.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        throwItem();
+    });
+
+/**
+ * (Currently empty) Handles the end of the throw when the throw button is released.
+ * 
+ * @param {TouchEvent} event - The touch event triggered by the touch interaction.
+ */
+    throwButton.addEventListener('touchend', (event) => {
+    });
+})
+
+/**
  * Stops the character from moving left or right by setting the corresponding keys to false.
  */
 function stopMoving(event) {
@@ -105,46 +198,6 @@ function stopMoving(event) {
     if (character.isDead()) return;
     keyboard.RIGHT = false;
     keyboard.LEFT = false;
-}
-
-/**
- * Stops the character's jump by setting the UP key to false.
- */
-function stopJump(event) {
-    event.preventDefault();
-    keyboard.UP = false;
-}
-
-/**
- * Stops the character's throwing action by setting the D key to false.
- */
-function stopThrow(event) {
-    event.preventDefault();
-    keyboard.D = false;
-}
-
-/**
- * Initiates movement to the left by setting the LEFT key to true.
- */
-function moveLeft(event) {
-    event.preventDefault();
-    keyboard.LEFT = true;
-}
-
-/**
- * Initiates movement to the right by setting the RIGHT key to true.
- */
-function moveRight(event) {
-    event.preventDefault();
-    keyboard.RIGHT = true;
-}
-
-/**
- * Makes the character jump by calling the jump method on the character object.
- */
-function jump(event) {
-    event.preventDefault();
-    character.jump();
 }
 
 let soundsMuted = false;
@@ -158,7 +211,7 @@ function muteSound() {
     const audioElements = document.querySelectorAll('audio');
     audioElements.forEach(audio => {
         audio.muted = soundsMuted;
-         world.muteAllSounds();
+        world.muteAllSounds();
 
     });
 
@@ -180,10 +233,9 @@ function checkOrientation() {
     if (window.innerWidth < 720 && window.innerHeight > window.innerWidth) {
         rotateWarning.style.opacity = 1;
     } else {
-        rotateWarning.style.opacity = 0; 
+        rotateWarning.style.opacity = 0;
     }
 }
 
-// Event listeners for checking orientation
-window.addEventListener('resize', checkOrientation); 
+window.addEventListener('resize', checkOrientation);
 window.addEventListener('load', checkOrientation); 
