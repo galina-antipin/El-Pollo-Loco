@@ -100,7 +100,8 @@ window.addEventListener('keyup', (e) => {
 /**
  * Stops the character from moving left or right by setting the corresponding keys to false.
  */
-function stopMoving() {
+function stopMoving(event) {
+    event.preventDefault();
     if (character.isDead()) return;
     keyboard.RIGHT = false;
     keyboard.LEFT = false;
@@ -109,35 +110,40 @@ function stopMoving() {
 /**
  * Stops the character's jump by setting the UP key to false.
  */
-function stopJump() {
+function stopJump(event) {
+    event.preventDefault();
     keyboard.UP = false;
 }
 
 /**
  * Stops the character's throwing action by setting the D key to false.
  */
-function stopThrow() {
+function stopThrow(event) {
+    event.preventDefault();
     keyboard.D = false;
 }
 
 /**
  * Initiates movement to the left by setting the LEFT key to true.
  */
-function moveLeft() {
+function moveLeft(event) {
+    event.preventDefault();
     keyboard.LEFT = true;
 }
 
 /**
  * Initiates movement to the right by setting the RIGHT key to true.
  */
-function moveRight() {
+function moveRight(event) {
+    event.preventDefault();
     keyboard.RIGHT = true;
 }
 
 /**
  * Makes the character jump by calling the jump method on the character object.
  */
-function jump() {
+function jump(event) {
+    event.preventDefault();
     character.jump();
 }
 

@@ -63,12 +63,12 @@
 
         <div class="navigation-bar" id="nav-bar">
             <div class="nav-arrows">
-                <button id="left-arrow" ontouchstart="moveLeft()" ontouchend="stopMoving()">&lt;</button>
-                <button id="right-arrow" ontouchstart="moveRight()" ontouchend="stopMoving()">&gt;</button>
+                <button id="left-arrow" ontouchstart="moveLeft(event)" ontouchend="stopMoving(event)">&lt; </button>
+                <button id="right-arrow" ontouchstart="moveRight(event)" ontouchend="stopMoving(event)">&gt;</button>
             </div>
             <div class="nav-controls">
-                <button id="jump-button" ontouchstart="jump()" ontouchend="stopJump()">Jump</button>
-                <button id="throw-button" ontouchstart="throwItem()" ontouchend="stopThrow()">Throw</button>
+                <button id="jump-button" ontouchstart="jump(event)" ontouchend="stopJump(event)">Jump</button>
+                <button id="throw-button" ontouchstart="throwItem(event)" ontouchend="stopThrow(event)">Throw</button>
             </div>
         </div>
 

@@ -2,8 +2,13 @@ class Endboss extends MovableObject {
     height = 500;
     width = 300;
     y = -20;
+    x = 6200;
     energy = 100;
     speed = 1.5;
+    endboss_dead = false;
+    isHurt = false;
+
+
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -49,65 +54,65 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_ALERT);
-        this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 5000; 
+        this.loadImages(this.IMAGES_ATTACK);
+        this.statusBar = new EndbossStatusBar();
+        this.hurt_sound = new Audio('audio/chicken-sound.mp3');
+        this.win_sound = new Audio('audio/win-sound.mp3');
         this.animate();
         this.movement();
     }
 
+    /**
+     * Animate the endboss of the game
+     */
     animate() {
-        this.endbossAnimateInterval = setInterval(() => {
-            if (this.isHurt){
-                this.playAnimation(this.IMAGES_HURT);}
-            if (this.energy <= 0) {
-                this.speed = 0;
+        setInterval(() => {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-                this.endbossStatusBar.setPercentage(0);
-                this.winScreen();
-            } else if (this.distanceTooClose()) {
-                this.playAnimation(this.IMAGES_ATTACK);
-            } else if (this.checkDistancePepeEndboss() || this.checkIfEndbossMoved()) {
-                this.playAnimation(this.IMAGES_WALKING);
+
+                if (this.isHurt) {
+                    this.playAnimation(this.IMAGES_HURT);
+                }
             } else {
                 this.playAnimation(this.IMAGES_ALERT);
             }
-        }, 300);
+        }, 1000 / 120);
     }
 
-
-    distanceTooClose() {
-        return this.x - world.character.x <= 150;
-    }
-
+    /**
+        * Animate the endboss movement and actions
+        */
     movement() {
-        this.endbossMovementInverval = setInterval(() => {
-            if (this.checkDistancePepeEndboss() || (this.checkIfEndbossMoved() && this.energy > 0)) {
+        this.endbossMovementInterval = setInterval(() => {
+            const distance = this.x - world.character.x;
+
+            if (distance < 600 && distance > 150) {
                 this.moveLeft();
+                this.playAnimation(this.IMAGES_WALKING);
+            } else if (distance <= 150) {
+                this.playAnimation(this.IMAGES_ATTACK);
             }
-        }, 1000 / 60);
-    }
 
-    checkDistancePepeEndboss() {
-        return world.character.x > 1950;
-    }
-
-    checkIfEndbossMoved() {
-        return this.x < 2300 || this.energy < 100; 
+        }, 1000 / 120);
     }
 
     hit() {
-        this.energy -= 25; 
+        this.hurt_sound.play();
+        this.energy -= 20;
         if (this.energy < 0) {
-            this.energy = 0; 
-        }
-        
-        this.playAnimation(this.IMAGES_HURT); 
-    
-        if (this.energy === 0) {
+            this.energy = 0;
+            this.endboss_dead = true;
             this.playAnimation(this.IMAGES_DEAD);
-            this.speed = 0; 
+            this.win_sound.play();
+            this.winScreen();
+        } else {
+            this.lastHit = new Date().getTime();
+            this.isHurt = true;
+            this.statusBar.setPercentage(this.energy);
         }
-    }}
+    }
+
+}

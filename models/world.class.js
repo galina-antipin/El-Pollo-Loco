@@ -22,7 +22,6 @@ class World {
     bottle_sound = new Audio('audio/bottle.mp3');
     small_chicken_dead = new Audio('audio/chicken-dead.mp3');
 
-
     bottlesStatusBar = new BottlesStatusBar();
     coinsStatusBar = new CoinsStatusbar();
     endbossStatusBar = new EndbossStatusBar();
@@ -56,10 +55,10 @@ class World {
         this.coins = this.level.coins;
     }
 
-/**
- * Starts the game loop, running specified checks at regular intervals.
- * This includes checking for collisions and handling object interactions.
- */
+    /**
+     * Starts the game loop, running specified checks at regular intervals.
+     * This includes checking for collisions and handling object interactions.
+     */
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -69,11 +68,11 @@ class World {
         }, 100);
     }
 
-/**
- * Checks whether the character has thrown an object based on keyboard input.
- * If the 'D' key is pressed and there are collected bottles available,
- * a new throwable object is created, and the collected bottle count is adjusted.
- */
+    /**
+     * Checks whether the character has thrown an object based on keyboard input.
+     * If the 'D' key is pressed and there are collected bottles available,
+     * a new throwable object is created, and the collected bottle count is adjusted.
+     */
     checkThrowObjects() {
         if (this.keyboard.D && this.collectedBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -84,7 +83,7 @@ class World {
     }
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach(enemy => {
             if (enemy.isDead) return;
 
             if (this.character.isColliding(enemy)) {
@@ -92,8 +91,12 @@ class World {
             }
         });
 
+        this.checkThrowableCollisions();
+    }
+
+    checkThrowableCollisions() {
         this.throwableObject.forEach((bottle, bottleIndex) => {
-            this.level.enemies.forEach((enemy) => {
+            this.level.enemies.forEach(enemy => {
                 if (bottle.isColliding(enemy)) {
                     if (enemy instanceof Endboss) {
                         enemy.hit();
@@ -279,35 +282,33 @@ class World {
     /**
  * Mutes or unmutes all audio based on the current sound mute state.
  */
-muteAllSounds() {
-    this.game_sound.volume = 0;
-    this.collect_sound.volume = 0;
-    this.bottle_sound.volume = 0;
-    this.small_chicken_dead.volume = 0;
-    this.chicken_dead_sound.volume = 0;
-    this.character.walking_sound.volume = 0;
-    this.character.jumping_sound.volume = 0;
-    this.character.hurt_sound.volume = 0;
-    this.character.dead_sound.volume = 0;
-    this.character.collect_sound.volume = 0;
-    this.character.snoring_sound.volume = 0;
-    this.win_sound = 0;
-    this.lost_sound = 0;
-}
+    muteAllSounds() {
+        this.game_sound.volume = 0;
+        this.collect_sound.volume = 0;
+        this.bottle_sound.volume = 0;
+        this.small_chicken_dead.volume = 0;
+        this.chicken_dead_sound.volume = 0;
+        this.character.walking_sound.volume = 0;
+        this.character.jumping_sound.volume = 0;
+        this.character.hurt_sound.volume = 0;
+        this.character.dead_sound.volume = 0;
+        this.character.collect_sound.volume = 0;
+        this.character.snoring_sound.volume = 0;
+        this.win_sound.volume = 0;
+    }
 
-unmuteAllSounds() {
-    this.game_sound.volume = 1;
-    this.collect_sound.volume = 1;
-    this.bottle_sound.volume = 1;
-    this.small_chicken_dead.volume = 1;
-    this.chicken_dead_sound.volume = 1;
-    this.character.walking_sound.volume = 1;
-    this.character.jumping_sound.volume = 1;
-    this.character.hurt_sound.volume = 1;
-    this.character.dead_sound.volume = 1;
-    this.character.collect_sound.volume = 1;
-    this.character.snoring_sound.volume = 1;
-    this.win_sound = 1;
-    this.lost_sound = 1;
-}
+    unmuteAllSounds() {
+        this.game_sound.volume = 1;
+        this.collect_sound.volume = 1;
+        this.bottle_sound.volume = 1;
+        this.small_chicken_dead.volume = 1;
+        this.chicken_dead_sound.volume = 1;
+        this.character.walking_sound.volume = 1;
+        this.character.jumping_sound.volume = 1;
+        this.character.hurt_sound.volume = 1;
+        this.character.dead_sound.volume = 1;
+        this.character.collect_sound.volume = 1;
+        this.character.snoring_sound.volume = 1;
+        this.win_sound.volume = 1;
+    }
 }
