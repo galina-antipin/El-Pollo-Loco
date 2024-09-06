@@ -82,6 +82,10 @@ class World {
         }
     }
 
+    /**
+    * Checks for collisions between the character and enemies in the level.
+    * If a collision is detected, it handles the interaction accordingly.
+    */
     checkCollisions() {
         this.level.enemies.forEach(enemy => {
             if (enemy.isDead) return;
@@ -94,6 +98,9 @@ class World {
         this.checkThrowableCollisions();
     }
 
+    /**
+    * Checks for collisions between throwable objects and enemies.
+    */
     checkThrowableCollisions() {
         this.throwableObject.forEach((bottle, bottleIndex) => {
             this.level.enemies.forEach(enemy => {
@@ -111,19 +118,35 @@ class World {
         });
     }
 
+    /**
+   * Handles the collision between the character and an enemy.
+   * 
+   * @param {MovableObject} enemy - The enemy the character collided with.
+   */
     handleCharacterEnemyCollision(enemy) {
-        const isCharacterAboveEnemy = this.character.y + this.character.height < enemy.y + enemy.height;
-
-        if (isCharacterAboveEnemy || this.isDead) {
-            this.small_chicken_dead.play();
-            enemy.changeToDeadImage();
-            this.character.jump()
-        } else {
+        if (enemy instanceof Endboss) {
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
+        } else {
+            const isCharacterAboveEnemy = this.character.y + this.character.height < enemy.y + enemy.height;
+
+            if (isCharacterAboveEnemy || this.isDead && !(enemy instanceof Endboss)) {
+                this.small_chicken_dead.play();
+                enemy.changeToDeadImage();
+                this.character.jump();
+            } else {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            }
         }
     }
 
+    /**
+  * Handles the collision between a bottle and an enemy.
+  * 
+  * @param {number} bottleIndex - The index of the throwable object in the array.
+  * @param {MovableObject} enemy - The enemy that the bottle collides with.
+  */
     handleBottleEnemyCollision(bottleIndex, enemy) {
         this.bottle_sound.play();
         this.throwableObject.splice(bottleIndex, 1);
@@ -190,6 +213,9 @@ class World {
         });
     }
 
+    /**
+   * Draws the game scene on the canvas, displaying all objects in the game.
+   */
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -280,7 +306,7 @@ class World {
     }
 
     /**
- * Mutes or unmutes all audio based on the current sound mute state.
+ * Mutes all audio based on the current sound mute state.
  */
     muteAllSounds() {
         this.game_sound.volume = 0;
@@ -297,6 +323,9 @@ class World {
         this.win_sound.volume = 0;
     }
 
+    /**
+  * Unmutes all audio to restore original sound settings.
+  */
     unmuteAllSounds() {
         this.game_sound.volume = 1;
         this.collect_sound.volume = 1;

@@ -37,10 +37,10 @@ class DrawableObject {
    * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw on.
    */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
+        if (this instanceof Character || this instanceof Chicken || Endboss || this instanceof Coin || this instanceof Bottle) {
             ctx.beginPath();
             ctx.lineWidth = '5';
-            ctx.strokeStyle = 'rgba(0, 0, 0, 0)';
+            ctx.strokeStyle = 'rgba(0, 0, 0, 5)';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }

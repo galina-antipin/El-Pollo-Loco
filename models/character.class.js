@@ -1,3 +1,7 @@
+/**
+ * Represents a character in the game that can move, jump, and interact with the world.
+ * @extends {MovableObject}
+ */
 class Character extends MovableObject {
     height = 250;
     y = 70;
@@ -6,6 +10,13 @@ class Character extends MovableObject {
     energy = 100;
     inactivityDuration = 0;
     isSleeping = false;
+
+    offset = {
+        top: 110,
+        left: 35,
+        right: 35,
+        bottom: 5,
+    };
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -80,6 +91,9 @@ class Character extends MovableObject {
     collect_sound = new Audio('audio/collect-coin.mp3');
     snoring_sound = new Audio('audio/snoring.mp3');
 
+    /**
+     * Constructs a new Character instance.
+     */
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -94,6 +108,9 @@ class Character extends MovableObject {
         this.startInactivityTimer();
     }
 
+    /**
+     * Handles character animation and movement at a fixed interval.
+     */
     animate() {
         setInterval(() => {
             this.walking_sound.pause();
@@ -149,6 +166,9 @@ class Character extends MovableObject {
         }, 100);
     }
 
+    /**
+     * Monitors inactivity and changes the character's state to sleeping when inactive.
+     */ 
     startInactivityTimer() {
         setInterval(() => {
             if (!this.isWalking) {
@@ -169,6 +189,9 @@ class Character extends MovableObject {
         }, 100);
     }
 
+    /**
+     * Makes the character jump and plays the jump sound.
+     */
     jump() {
         this.speedY = 27;
         this.jumping_sound.play();

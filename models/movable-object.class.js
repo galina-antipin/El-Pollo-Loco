@@ -1,3 +1,8 @@
+/**
+ * Represents an object that can be moved within the game world.
+ * Inherits properties and methods from DrawableObject.
+ * @extends {DrawableObject}
+ */
 class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
@@ -10,10 +15,13 @@ class MovableObject extends DrawableObject {
     offset = {
         top: 0,
         left: 0,
-        right: 20,
+        right: 0,
         bottom: 0
     };
 
+   /**
+     * Applies gravity to the object, updating its vertical position.
+     */  
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -23,6 +31,12 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+     /**
+     * Checks if the object is above the ground.
+     * This method overrides any behavior for throwable objects.
+     * 
+     * @returns {boolean} - True if above ground, otherwise false.
+     */ 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
@@ -31,6 +45,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
+       /**
+     * Checks for a collision with another movable object.
+     * 
+     * @param {MovableObject} mo - The other object to check for a collision with.
+     * @returns {boolean} - True if colliding, otherwise false.
+     */ 
     isColliding(mo) {
         return (this.x + this.width - this.offset.right > mo.x + mo.offset.left) &&
             (this.x + this.offset.left < mo.x + mo.width - mo.offset.right) &&
@@ -38,6 +58,10 @@ class MovableObject extends DrawableObject {
             (this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom);
     }
 
+     /**
+     * Handles a hit taken by the object.
+     * Reduces energy and checks for death.
+     */ 
     hit() {
         this.hurt_sound.play();
         this.energy -= 5;
@@ -54,16 +78,33 @@ class MovableObject extends DrawableObject {
         }
     }
 
+       /**
+     * Checks if the object is currently hurt (within 1 second of being hit).
+     * 
+     * @returns {boolean} - True if the object is hurt, otherwise false.
+     */ 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
+    /**
+     * Checks if the object is dead (energy is 0).
+     * 
+     * @returns {boolean} - True if dead, otherwise false.
+     */
     isDead() {
         return this.energy == 0;
     }
 
+    
+    /**
+     * Plays an animation based on the provided image array.
+     * Updates the current image index to display the next image.
+     * 
+     * @param {Array<string>} images - Array of image paths for the animation.
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -71,28 +112,47 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+       /**
+     * Moves the object to the right.
+     */ 
     moveRight() {
         this.x += this.speed;
     }
 
+     /**
+     * Moves the object to the left.
+     */ 
     moveLeft() {
         this.x -= this.speed;
     }
 
+     /**
+     * Makes the object jump by setting its vertical speed.
+     */ 
     jump() {
         this.speedY = 30;
     }
 
+    /**
+     * Displays the game over screen and clears all intervals.
+     */ 
     gameOverScreen() {
         document.getElementById('gameOverMenu').classList.remove('d-none');
         this.clearAllIntervals();
         muteSound();
     }
 
+       /**
+     * Clears all intervals to pause the game.
+     */ 
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
     }
 
+   
+    /**
+     * Displays the win screen and clears all intervals.
+     */ 
     winScreen() {
         document.getElementById('win-screen').classList.remove('d-none');
         this.clearAllIntervals();

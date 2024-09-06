@@ -1,3 +1,7 @@
+/**
+ * Represents an end boss in the game that can walk, attack, and take damage.
+ * @extends {MovableObject}
+ */
 class Endboss extends MovableObject {
     height = 500;
     width = 300;
@@ -7,8 +11,6 @@ class Endboss extends MovableObject {
     speed = 1.5;
     endboss_dead = false;
     isHurt = false;
-
-
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -51,6 +53,10 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
 
+    /**
+   * Constructs a new Endboss instance.
+   * Initializes the boss's images, sounds, and starts animations.
+   */
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -76,10 +82,8 @@ class Endboss extends MovableObject {
                 if (this.isHurt) {
                     this.playAnimation(this.IMAGES_HURT);
                 }
-            } else {
-                this.playAnimation(this.IMAGES_ALERT);
             }
-        }, 1000 / 120);
+        }, 1000 / 10);
     }
 
     /**
@@ -96,12 +100,17 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_ATTACK);
             }
 
-        }, 1000 / 120);
+        }, 1000 / 10);
     }
 
+    /**
+  * Registers a hit on the end boss.
+  * Plays the hurt sound, reduces energy, and updates the status.
+  */
     hit() {
         this.hurt_sound.play();
-        this.energy -= 20;
+        this.energy -= 25;
+        this.playAnimation(this.IMAGES_HURT);
         if (this.energy < 0) {
             this.energy = 0;
             this.endboss_dead = true;
