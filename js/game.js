@@ -116,10 +116,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * 
  * @param {TouchEvent} event - The touch event triggered by the touch interaction.
  */
-    leftArrow.addEventListener('touchstart', (event) => {
+    leftArrow.addEventListener('touchstart',  (event) => {
         event.preventDefault();
         keyboard.LEFT = true;
-        moveLeft();
     });
 
     /**
@@ -129,7 +128,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   */
     leftArrow.addEventListener('touchend', (event) => {
         keyboard.LEFT = false;
-        stopMoving();
     });
 
     /**
@@ -140,7 +138,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     rightArrow.addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.RIGHT = true;
-        moveRight();
     });
 
     /**
@@ -150,7 +147,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     */
     rightArrow.addEventListener('touchend', (event) => {
         keyboard.RIGHT = false;
-        stopMoving();
     });
 
 /**
@@ -160,7 +156,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   */
     jumpButton.addEventListener('touchstart', (event) => {
         event.preventDefault();
-        jump();
+        keyboard.SPACE = true;
     });
 
 /**
@@ -169,6 +165,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * @param {TouchEvent} event - The touch event triggered by the touch interaction.
  */
     jumpButton.addEventListener('touchend', (event) => {
+        event.preventDefault();
+        keyboard.SPACE = false;
     });
 
 /**
@@ -178,7 +176,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
  */
     throwButton.addEventListener('touchstart', (event) => {
         event.preventDefault();
-        throwItem();
+        keyboard.D = true;
     });
 
 /**
@@ -187,6 +185,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * @param {TouchEvent} event - The touch event triggered by the touch interaction.
  */
     throwButton.addEventListener('touchend', (event) => {
+        keyboard.D = false;
     });
 })
 
@@ -194,7 +193,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * Stops the character from moving left or right by setting the corresponding keys to false.
  */
 function stopMoving(event) {
-    event.preventDefault();
     if (character.isDead()) return;
     keyboard.RIGHT = false;
     keyboard.LEFT = false;
