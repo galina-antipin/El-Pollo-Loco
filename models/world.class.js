@@ -169,8 +169,9 @@ class World {
         if (this.collectedCoins < 5) {
             this.collectedCoins += 1;
             this.coinsStatusBar.setPercentage((this.collectedCoins / 5) * 100);
-            this.collect_sound.play();
+          
         }
+        else { this.collect_sound.play();}
     }
 
     /**
