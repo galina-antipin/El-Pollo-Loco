@@ -132,7 +132,7 @@ class World {
         } else {
             const isCharacterAboveEnemy = this.character.y + this.character.height < enemy.y + enemy.height;
 
-            if (isCharacterAboveEnemy || this.isDead && !(enemy instanceof Endboss)) {
+            if (isCharacterAboveEnemy || this.chickenIsDead && !(enemy instanceof Endboss)) {
                 this.small_chicken_dead.play();
                 enemy.changeToDeadImage();
                 this.character.jump();
