@@ -125,7 +125,9 @@ class World {
    */
     handleCharacterEnemyCollision(enemy) {
         if (enemy instanceof Endboss) {
+            console.log("Kollision mit Endboss!");
             this.character.hit();
+            console.log("Charakter Energie: ", this.character.energy);
             this.statusBar.setPercentage(this.character.energy);
         } else {
             const isCharacterAboveEnemy = this.character.y + this.character.height < enemy.y + enemy.height;
