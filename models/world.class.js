@@ -88,7 +88,7 @@ class World {
     */
     checkCollisions() {
         this.level.enemies.forEach(enemy => {
-            if (enemy.isDead) return;
+            if (enemy.chickenIsDead) return;
 
             if (this.character.isColliding(enemy)) {
                 this.handleCharacterEnemyCollision(enemy);

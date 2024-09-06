@@ -149,7 +149,6 @@ class MovableObject extends DrawableObject {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
     }
 
-   
     /**
      * Displays the win screen and clears all intervals.
      */ 

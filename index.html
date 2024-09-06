@@ -30,25 +30,23 @@
 </head>
 
 <body>
-
     <h1>El Pollo Loco</h1>
 
-    <div id="content-wrapper">    
+    <div id="content-wrapper">
         <div class="rotate-warning" id="rotate-warning">Turn your Device to play</div>
         <div id="start-screen" class="start-screen">
             <button id="start-btn" onclick="startGame()">Start Game</button>
         </div>
+
         <footer id="footer">
             <span class="instructions"> <a href="instructions.html">Instructions
                 </a> </span>
             <div class="space-between"></div>
             <span class="impressum"><a href="impressum.html">Impressum </a></span>
-
         </footer>
 
         <audio id="game-sound" src="./audio/taratata.mp3" preload="auto"></audio>
         <canvas id="canvas" width="720" height="480" style="display:none;"></canvas>
-
 
         <div id="gameOverMenu" class="d-none">
             <a href="index.html">
@@ -58,8 +56,8 @@
             <a href="index.html">
                 <button id="mainMenuButton">Back to Startscreen</button></a>
         </div>
-        <div id="mute-btn-overlay" class="overlay d-none"> <img src="./img/sound-on.svg" alt="sound on" id="mute-button" class="mute-button"
-                onclick="muteSound()"></div>
+        <div id="mute-btn-overlay" class="overlay d-none"> <img src="./img/sound-on.svg" alt="sound on" id="mute-button"
+                class="mute-button" onclick="muteSound()"></div>
 
         <div class="navigation-bar" id="nav-bar">
             <div class="nav-arrows">
@@ -71,9 +69,6 @@
                 <button id="throw-button" ontouchstart="throwItem(event)" ontouchend="stopThrow(event)">Throw</button>
             </div>
         </div>
-
-
-
     </div>
 </body>
 

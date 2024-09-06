@@ -13,7 +13,7 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png',
     ];
 
-    isDead = false;
+    chickenIsDead = false;
 
     /**
     * Constructs a new Chicken instance.
@@ -34,13 +34,13 @@ class Chicken extends MovableObject {
   */
     animate() {
         setInterval(() => {
-            if (!this.isDead) {
+            if (!this.chickenIsDead) {
                 this.moveLeft();
             }
         }, 1000 / 60);
 
         setInterval(() => {
-            if (!this.isDead) {
+            if (!this.chickenIsDead) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);
@@ -51,6 +51,6 @@ class Chicken extends MovableObject {
    */
     changeToDeadImage() {
         this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
-        this.isDead = true;
+        this.chickenIsDead = true;
     }
 }
