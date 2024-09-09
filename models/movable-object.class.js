@@ -62,19 +62,21 @@ class MovableObject extends DrawableObject {
      * Handles a hit taken by the object.
      * Reduces energy and checks for death.
      */ 
-    hit() {
-        this.hurt_sound.play();
-        this.energy -= 5;
-        if (this.energy < 0) {
-            this.energy = 0;   
-            this.dead_sound.play();
-            this.world.isGameOver = true;
-            this.world.clearGameObjects();
-            this.gameOverScreen();
+     hit() {
+        this.hurt_sound.play(); 
+        this.energy -= 5; 
+    
+        if (this.energy <= 0) {
+            this.energy = 0;  
+            this.dead_sound.play(); 
 
+            setTimeout(() => {
+                this.world.isGameOver = true; 
+                this.world.clearGameObjects();
+                this.gameOverScreen(); 
+            }, 1000); 
         } else {
             this.lastHit = new Date().getTime();
-
         }
     }
 
@@ -139,7 +141,6 @@ class MovableObject extends DrawableObject {
     gameOverScreen() {
         document.getElementById('gameOverMenu').classList.remove('d-none');
         this.clearAllIntervals();
-        muteSound();
     }
 
        /**
@@ -155,7 +156,6 @@ class MovableObject extends DrawableObject {
     winScreen() {
         document.getElementById('win-screen').classList.remove('d-none');
         this.clearAllIntervals();
-        muteSound();
     }
 }
 

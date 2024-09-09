@@ -14,13 +14,14 @@ class World {
     collectedCoins = 0;
     bottles = [];
     collectedBottles = 0;
-    game_sound = new Audio('audio/taratata.mp3');
 
+    game_sound = new Audio('audio/taratata.mp3');
     collect_sound = new Audio('audio/collect-coin.mp3');
     chicken_dead_sound = new Audio('audio/chicken-sound.mp3');
     win_sound = new Audio('audio/win-sound.mp3');
     bottle_sound = new Audio('audio/bottle.mp3');
     small_chicken_dead = new Audio('audio/chicken-dead.mp3');
+    dead_sound = new Audio('audio/dead.mp3');
 
     bottlesStatusBar = new BottlesStatusBar();
     coinsStatusBar = new CoinsStatusbar();
@@ -125,9 +126,7 @@ class World {
    */
     handleCharacterEnemyCollision(enemy) {
         if (enemy instanceof Endboss) {
-            console.log("Kollision mit Endboss!");
             this.character.hit();
-            console.log("Charakter Energie: ", this.character.energy);
             this.statusBar.setPercentage(this.character.energy);
         } else {
             const isCharacterAboveEnemy = this.character.y + this.character.height < enemy.y + enemy.height;
@@ -324,9 +323,10 @@ class World {
         this.character.collect_sound.volume = 0;
         this.character.snoring_sound.volume = 0;
         this.win_sound.volume = 0;
+        this.dead_sound.volume = 0;
     }
 
-    /**
+/**
   * Unmutes all audio to restore original sound settings.
   */
     unmuteAllSounds() {
@@ -342,5 +342,6 @@ class World {
         this.character.collect_sound.volume = 1;
         this.character.snoring_sound.volume = 1;
         this.win_sound.volume = 1;
+        this.dead_sound.volume = 1;
     }
 }
