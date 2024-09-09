@@ -38,19 +38,27 @@ a {
     opacity: 0;
 }
 
-/* mute sound overlay*/
-.overlay {
-    z-index: 2;
-    position: absolute;
-    top: 5px;
-    right: 5px;
+/* mute and home btn overlay*/
+.btn-overlay {
+    display: flex;
+    align-items: center;
 }
 
-.overlay img {
+.btn-overlay img:hover {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(93%) saturate(632%) hue-rotate(353deg) brightness(74%) contrast(88%);
+}
+
+#mute-btn {
+    height: 25px;
+    width: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#home-btn {
     height: 35px;
     width: 35px;
     cursor: pointer;
-    margin: 10px;
 }
 
 /* Start Screen CSS*/
@@ -120,6 +128,7 @@ footer {
 }
 
 /* Navigation Bar CSS */
+
 .navigation-bar {
     display: flex;
     position: absolute;
@@ -127,7 +136,6 @@ footer {
     z-index: 2;
     width: 100%;
     justify-content: space-between;
-    opacity: 0;
 }
 
 .navigation-bar button {

@@ -56,17 +56,18 @@
             <a href="index.html">
                 <button id="mainMenuButton">Back to Startscreen</button></a>
         </div>
-        <div id="mute-btn-overlay" class="overlay d-none"> <img src="./img/sound-on.svg" alt="sound on" id="mute-button"
-                class="mute-button" onclick="muteSound()"></div>
-
-        <div class="navigation-bar" id="nav-bar">
+        <div class="navigation-bar d-none" id="nav-bar">
             <div class="nav-arrows">
                 <button id="left-arrow">&lt; </button>
                 <button id="right-arrow">&gt;</button>
             </div>
+   <div class="btn-overlay"><img src="./img/sound-on.svg" alt="sound on" id="mute-btn"
+                class="mute-button" onclick="muteSound()">
+            <a href="index.html"><img src="./img/home-btn.svg" alt="home button" id="home-btn"></a></div>
+    
             <div class="nav-controls">
-                <button id="jump-button" >Jump</button>
-                <button id="throw-button" >Throw</button>
+                <button id="jump-button">Jump</button>
+                <button id="throw-button">Throw</button>
             </div>
         </div>
     </div>

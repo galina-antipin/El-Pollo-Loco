@@ -10,8 +10,8 @@ let character;
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+    document.getElementById('nav-bar').classList.remove('d-none');
     document.getElementById('footer').style.display = 'none';
-    document.getElementById('mute-btn-overlay').classList.remove('d-none');
 
     const gameSound = document.getElementById('game-sound');
     gameSound.play();
@@ -187,7 +187,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
     throwButton.addEventListener('touchend', (event) => {
         keyboard.D = false;
     });
-})
+
+        // Maus-Events
+        leftArrow.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            keyboard.LEFT = true;
+        });
+        leftArrow.addEventListener('mouseup', (event) => {
+            keyboard.LEFT = false;
+        });
+    
+        rightArrow.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            keyboard.RIGHT = true;
+        });
+        rightArrow.addEventListener('mouseup', (event) => {
+            keyboard.RIGHT = false;
+        });
+    
+        jumpButton.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            keyboard.SPACE = true;
+        });
+        jumpButton.addEventListener('mouseup', (event) => {
+            keyboard.SPACE = false;
+        });
+    
+        throwButton.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            keyboard.D = true;
+        });
+        throwButton.addEventListener('mouseup', (event) => {
+            keyboard.D = false;
+        });
+    });
 
 /**
  * Stops the character from moving left or right by setting the corresponding keys to false.
@@ -213,7 +246,7 @@ function muteSound() {
 
     });
 
-    const muteButton = document.getElementById('mute-button');
+    const muteButton = document.getElementById('mute-btn');
     if (soundsMuted) {
         muteButton.src = './img/sound-off.svg';
     } else {
