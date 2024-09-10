@@ -97,6 +97,7 @@ class Endboss extends MovableObject {
                 this.moveLeft();
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (distance <= 150) {
+                this.moveLeft();
                 this.playAnimation(this.IMAGES_ATTACK);
             }
 
@@ -108,15 +109,20 @@ class Endboss extends MovableObject {
   * Plays the hurt sound, reduces energy, and updates the status.
   */
     hit() {
-        this.hurt_sound.play();
+        if (!soundsMuted) {
+            this.hurt_sound.play();
+        }
         this.energy -= 25;
         this.playAnimation(this.IMAGES_HURT);
         if (this.energy < 0) {
             this.energy = 0;
             this.endboss_dead = true;
             this.playAnimation(this.IMAGES_DEAD);
-            this.win_sound.play();
+            if (!soundsMuted) {
+                this.win_sound.play();
+            }
             this.winScreen();
+
         } else {
             this.lastHit = new Date().getTime();
             this.isHurt = true;

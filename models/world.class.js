@@ -84,6 +84,7 @@ class World {
             this.collectedBottles--;
             this.bottlesStatusBar.setPercentage((this.collectedBottles / 5) * 100);
             this.lastThrowTime = currentTime;
+            this.character.isSleeping = false;
         }
     }
 
@@ -174,7 +175,7 @@ class World {
         if (this.collectedCoins < 5) {
             this.collectedCoins += 1;
             this.coinsStatusBar.setPercentage((this.collectedCoins / 5) * 100);
-          
+            this.collect_sound.play();
         }
         else { this.collect_sound.play();}
     }

@@ -18,7 +18,7 @@ class Character extends MovableObject {
         bottom: 5,
     };
 
-    lastJumpTime = 0; 
+    lastJumpTime = 0;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
