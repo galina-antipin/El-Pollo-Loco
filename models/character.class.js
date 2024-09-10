@@ -18,6 +18,8 @@ class Character extends MovableObject {
         bottom: 5,
     };
 
+    lastJumpTime = 0; 
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -115,6 +117,7 @@ class Character extends MovableObject {
         setInterval(() => {
             this.walking_sound.pause();
             if (!this.isSleeping) {
+                const currentTime = Date.now();
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
@@ -133,10 +136,12 @@ class Character extends MovableObject {
                 }
 
                 if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                    if (currentTime - this.lastJumpTime >= 1600) {
                     this.jump();
                     this.isWalking = true;
+                    this.lastJumpTime = currentTime;
                 }
-            }
+            } }
 
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);

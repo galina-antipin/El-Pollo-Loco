@@ -15,6 +15,8 @@ class World {
     bottles = [];
     collectedBottles = 0;
 
+    lastThrowTime = 0;
+
     game_sound = new Audio('audio/taratata.mp3');
     collect_sound = new Audio('audio/collect-coin.mp3');
     chicken_dead_sound = new Audio('audio/chicken-sound.mp3');
@@ -75,11 +77,13 @@ class World {
      * a new throwable object is created, and the collected bottle count is adjusted.
      */
     checkThrowObjects() {
-        if (this.keyboard.D && this.collectedBottles > 0) {
+        const currentTime = Date.now(); 
+        if (this.keyboard.D && this.collectedBottles > 0 && (currentTime - this.lastThrowTime >= 1500)) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObject.push(bottle);
             this.collectedBottles--;
             this.bottlesStatusBar.setPercentage((this.collectedBottles / 5) * 100);
+            this.lastThrowTime = currentTime;
         }
     }
 
